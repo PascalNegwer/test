@@ -182,7 +182,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "\n.logo {\n  width: 40%;\n}\n.btn {\n  width: 65%;\n  margin-top: 25%;\n}\n.inp {\n  margin: 1rem 0;\n}\n.l_wrapper {\n  justify-content: space-around;\n  position: relative;\n}\n.link {\n  font-size: 1.8rem;\n  line-height: 2;\n  margin-top: 12.5%;\n  margin-bottom: 12.5%;\n  transition: color .15s ease-in-out;\n}\n.link:active {\n  opacity: .5;\n}\n", ""]);
+exports.push([module.i, "\n.logo {\n  width: 40%;\n  margin-bottom: 20vw;\n}\n.btn {\n  width: 65%;\n  margin-top: 20vw;\n  margin-bottom: 20vw;\n}\n.inp {\n  margin: 1rem 0;\n}\n.l_wrapper {\n  justify-content: flex-start;\n}\n.link {\n  font-size: 1.8rem;\n  line-height: 2;\n  transition: color .15s ease-in-out;\n}\n.link:active {\n  opacity: .5;\n}\n", ""]);
 
 // exports
 
