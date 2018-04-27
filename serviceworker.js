@@ -69,7 +69,7 @@ workbox.core.setLogLevel(workbox.core.LOG_LEVELS.debug);
 
 workbox.precaching.precacheAndRoute(filesToCache);
 
-workbox.routing(
+workbox.routing.registerRoute(
   new RegExp('https://storage.googleapis.com/*'),
   workbox.strategies.staleWhileRevalidate()
 );
