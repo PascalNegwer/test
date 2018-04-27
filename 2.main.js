@@ -109,6 +109,7 @@ if (false) {(function () {
 //
 //
 //
+//
 
 
 
@@ -207,11 +208,6 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "l_flex l_wrapper" }, [
-    _c("img", {
-      staticClass: "logo u_center",
-      attrs: { src: "assets/img/logo.svg" }
-    }),
-    _vm._v(" "),
     _c(
       "div",
       { staticClass: "loader", class: { "loader--loading": _vm.loading } },
@@ -235,6 +231,11 @@ var render = function() {
         )
       ]
     ),
+    _vm._v(" "),
+    _c("img", {
+      staticClass: "logo u_center",
+      attrs: { src: "assets/img/logo.svg" }
+    }),
     _vm._v(" "),
     _c(
       "div",
