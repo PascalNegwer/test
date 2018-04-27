@@ -334,7 +334,7 @@ var render = function() {
         _c(
           "router-link",
           { staticClass: "link u_center", attrs: { to: "/signup" } },
-          [_vm._v("Noch kein Account?")]
+          [_vm._v("Noch kein Account?dddddd")]
         )
       ],
       1
