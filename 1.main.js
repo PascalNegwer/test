@@ -198,7 +198,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "\n.logo {\n  width: 40%;\n  margin-bottom: 8vh;\n}\n.btn {\n  width: 65%;\n  margin-top: 8vh;\n  margin-bottom: 8vh;\n}\n.inp {\n  margin: 1rem 0;\n}\n.l_wrapper {\n  justify-content: flex-start;\n}\n.link {\n  font-size: 1.8rem;\n  line-height: 2;\n  transition: color .15s ease-in-out;\n}\n.link:active {\n  opacity: .5;\n}\n.content {\n  opacity: 1;\n  transition: opacity .15s ease-in-out, visibility .15s ease-in-out .15s;\n}\n.content--hidden {\n  opacity: 0;\n  visibility: hidden;\n}\n.loader {\n  top: 50%;\n  left: 50%;\n  transform: translateX(-50%);\n  opacity: 0;\n  visibility: hidden;\n  transition: opacity .15s ease-in-out;\n}\n.loader--active {\n  visibility: visible;\n  opacity: 1;\n}\n.u_gradient-background {\n  background-image: url('');\n}\n", ""]);
+exports.push([module.i, "\n.logo {\n  width: 40%;\n  margin-bottom: 8vh;\n}\n.btn {\n  width: 65%;\n  margin-top: 8vh;\n  margin-bottom: 8vh;\n}\n.inp {\n  margin: 1rem 0;\n}\n.l_wrapper {\n  justify-content: flex-start;\n}\n.link {\n  font-size: 1.8rem;\n  line-height: 2;\n  transition: color .15s ease-in-out;\n}\n.link:active {\n  opacity: .5;\n}\n.content {\n  opacity: 1;\n  transition: opacity .15s ease-in-out, visibility .15s ease-in-out .15s;\n}\n.content--hidden {\n  opacity: 0;\n  visibility: hidden;\n}\n.loader {\n  top: 50%;\n  left: 50%;\n  transform: translateX(-50%);\n  opacity: 0;\n  visibility: hidden;\n  transition: opacity .15s ease-in-out;\n}\n.loader--active {\n  visibility: visible;\n  opacity: 1;\n}\n", ""]);
 
 // exports
 
