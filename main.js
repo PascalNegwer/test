@@ -8575,7 +8575,6 @@ if (inBrowser) {
 
 
 
-//import { EventBus } from './utils/eventBus.js';
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: 'App',
@@ -16448,7 +16447,7 @@ exports = module.exports = __webpack_require__(6)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 

@@ -1,14 +1,9 @@
-importScripts('/test/workbox/workbox-v3.1.0/workbox-sw.js');
-//importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.1.0/workbox-sw.js');
+importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.1.0/workbox-sw.js');
 
 let revision = (new Date()).toTimeString();
 let filesToCache = [
   {
     'url': '/test/assets/css/main.css',
-    'revision': revision,
-  },
-  {
-    'url': '/test/workbox/workbox-v3.1.0/workbox-sw.js',
     'revision': revision,
   },
   {
@@ -67,10 +62,10 @@ let filesToCache = [
   },
 ];
 
-//workbox.setConfig({
-  // debug: true
-//});
-//workbox.core.setLogLevel(workbox.core.LOG_LEVELS.debug);
+workbox.setConfig({
+   debug: true
+});
+workbox.core.setLogLevel(workbox.core.LOG_LEVELS.debug);
 
 workbox.precaching.precacheAndRoute(filesToCache);
 
