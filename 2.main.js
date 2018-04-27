@@ -110,6 +110,10 @@ if (false) {(function () {
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -207,7 +211,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "l_flex l_wrapper" }, [
+  return _c("div", { staticClass: "l_main" }, [
     _c(
       "div",
       { staticClass: "loader", class: { "loader--active": _vm.loading } },
@@ -232,113 +236,117 @@ var render = function() {
       ]
     ),
     _vm._v(" "),
-    _c("img", {
-      staticClass: "logo u_center",
-      attrs: { src: "assets/img/logo.svg" }
-    }),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "l_flex content",
-        class: { "content--hidden": _vm.loading }
-      },
-      [
-        _vm.error.message
-          ? _c("div", [
-              _vm._v(
-                "\n      " +
-                  _vm._s(_vm.error.statusCode) +
-                  ": " +
-                  _vm._s(_vm.error.message) +
-                  "\n    "
-              )
-            ])
-          : _vm._e(),
+    _c("main", { staticClass: "l_flex l_flex--center" }, [
+      _c("div", { staticClass: "l_flex l_wrapper" }, [
+        _c("img", {
+          staticClass: "logo u_center",
+          attrs: { src: "assets/img/logo.svg" }
+        }),
         _vm._v(" "),
         _c(
-          "form",
+          "div",
           {
-            staticClass: "l_flex",
-            on: {
-              submit: function($event) {
-                $event.preventDefault()
-                return _vm.login($event)
-              }
-            }
+            staticClass: "l_flex content",
+            class: { "content--hidden": _vm.loading }
           },
           [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.user.data.userName,
-                  expression: "user.data.userName"
-                }
-              ],
-              staticClass: "inp inp--18",
-              attrs: {
-                type: "email",
-                placeholder: "E-Mail-Adresse",
-                required: ""
-              },
-              domProps: { value: _vm.user.data.userName },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.user.data, "userName", $event.target.value)
-                }
-              }
-            }),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.user.data.password,
-                  expression: "user.data.password"
-                }
-              ],
-              staticClass: "inp inp--18",
-              attrs: {
-                type: "password",
-                placeholder: "Passwort",
-                required: ""
-              },
-              domProps: { value: _vm.user.data.password },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.user.data, "password", $event.target.value)
-                }
-              }
-            }),
+            _vm.error.message
+              ? _c("div", [
+                  _vm._v(
+                    "\n          " +
+                      _vm._s(_vm.error.statusCode) +
+                      ": " +
+                      _vm._s(_vm.error.message) +
+                      "\n        "
+                  )
+                ])
+              : _vm._e(),
             _vm._v(" "),
             _c(
-              "button",
+              "form",
               {
-                staticClass: "btn btn--18 u_center",
-                attrs: { type: "submit" }
+                staticClass: "l_flex",
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.login($event)
+                  }
+                }
               },
-              [_vm._v("Login")]
+              [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.user.data.userName,
+                      expression: "user.data.userName"
+                    }
+                  ],
+                  staticClass: "inp inp--18",
+                  attrs: {
+                    type: "email",
+                    placeholder: "E-Mail-Adresse",
+                    required: ""
+                  },
+                  domProps: { value: _vm.user.data.userName },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.user.data, "userName", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.user.data.password,
+                      expression: "user.data.password"
+                    }
+                  ],
+                  staticClass: "inp inp--18",
+                  attrs: {
+                    type: "password",
+                    placeholder: "Passwort",
+                    required: ""
+                  },
+                  domProps: { value: _vm.user.data.password },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.user.data, "password", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn--18 u_center",
+                    attrs: { type: "submit" }
+                  },
+                  [_vm._v("Login")]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "router-link",
+              { staticClass: "link u_center", attrs: { to: "/signup" } },
+              [_vm._v("Noch kein Account?")]
             )
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "router-link",
-          { staticClass: "link u_center", attrs: { to: "/signup" } },
-          [_vm._v("Noch kein Account?")]
+          ],
+          1
         )
-      ],
-      1
-    )
+      ])
+    ])
   ])
 }
 var staticRenderFns = []
