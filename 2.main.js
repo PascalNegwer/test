@@ -210,7 +210,7 @@ var render = function() {
   return _c("div", { staticClass: "l_flex l_wrapper" }, [
     _c(
       "div",
-      { staticClass: "loader", class: { "loader--loading": _vm.loading } },
+      { staticClass: "loader", class: { "loader--active": _vm.loading } },
       [
         _c(
           "svg",
