@@ -142,7 +142,7 @@
 /******/ 	__webpack_require__.oe = function(err) { console.error(err); throw err; };
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 10);
+/******/ 	return __webpack_require__(__webpack_require__.s = 9);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -337,6 +337,192 @@ process.umask = function() { return 0; };
 
 /***/ }),
 /* 1 */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_router__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__cookie_js__ = __webpack_require__(3);
+
+
+
+
+__WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].use(__WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]);
+
+const router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
+  routes: [
+    {
+      path: '/login',
+      name: 'login',
+      component: function (resolve) {
+        __webpack_require__.e/* require */(1).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(20)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe)
+      },
+      beforeEnter: exceptLoggedIn,
+    },
+    {
+      path: '/signup',
+      name: 'signup',
+      component: function (resolve) {
+        __webpack_require__.e/* require */(2).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(21)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe)
+      },
+      beforeEnter: exceptLoggedIn,
+    },
+    {
+      path: '/',
+      component: function (resolve) {
+        __webpack_require__.e/* require */(0).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(22)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe)
+      },
+      beforeEnter: loggedInOnly,
+      children: [
+        {
+          path: '/',
+          name: 'home',
+          component: function (resolve) {
+            __webpack_require__.e/* require */(3).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(19)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe)
+          },
+          beforeEnter: loggedInOnly,
+        },
+      ]
+    },
+    {path: '*', redirect: '/'}
+  ]
+});
+
+function exceptLoggedIn(to, from, next) {
+  let sessionToken = __WEBPACK_IMPORTED_MODULE_2__cookie_js__["a" /* default */].get('sessionToken');//
+
+  if (sessionToken) {
+    let user = new Apiomat.FrontendUser();
+    user.setSessionToken(sessionToken);
+    Apiomat.Datastore.configureWithUserSessionToken(user);
+
+    user.loadMe({
+      onOk: result => {
+        next(false);
+      },
+      onError: error => {
+        next();
+      }
+    }, true);
+  } else {
+    next();
+  }
+}
+
+function loggedInOnly(to, from, next) {
+  let sessionToken = __WEBPACK_IMPORTED_MODULE_2__cookie_js__["a" /* default */].get('sessionToken');
+  let user = new Apiomat.FrontendUser();
+
+  Apiomat.Datastore.setCachingStrategy(Apiomat.AOMCacheStrategy.CACHE_ELSE_NETWORK);
+  Apiomat.Datastore.getInstance().setOfflineUsageForClass(Apiomat.FrontendUser, true);
+
+  if (!sessionToken) {
+    try {
+      user.initDatastoreIfNeeded();
+    } catch (error) {
+      next(false);
+      return;
+    }
+
+    user.requestSessionToken(true, {
+      onOk: result => {
+        __WEBPACK_IMPORTED_MODULE_2__cookie_js__["a" /* default */].set('sessionToken', result['sessionToken']);
+        next();
+      },
+      onError: error => {
+        next('/login');
+      }
+    });
+  } else {
+    user.setSessionToken(sessionToken);
+    Apiomat.Datastore.configureWithSessionToken(sessionToken);
+    user.loadMe({
+      onOk: result => {
+        next();
+      },
+      onError: error => {
+        if (to.path === '/login' || to.path === '/signup') {
+          next();
+        } else {
+          next('/login');
+        }
+      }
+    }, true);
+  }
+}
+
+/* harmony default export */ __webpack_exports__["a"] = (router);
+
+/***/ }),
+/* 3 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = ((function () {
+  function get(cname) {
+    let name = cname + '=';
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) === ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) === 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return false;
+  }
+
+  function set(name, value, expires) {
+    let date = new Date();
+    date.setTime(date.getTime() + expires);
+    document.cookie = name + '=' + value + ';'
+      + 'expires='+ date.toUTCString() + ';'
+      + 'path=/;';
+  }
+
+  function expireNow(name) {
+    document.cookie = name + '=; max-age=0; path=/;';
+  }
+
+  return {
+    get: get,
+    set: set,
+    expireNow: expireNow
+  }
+})());
+
+/***/ }),
+/* 4 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8373,202 +8559,15 @@ if (inBrowser) {
 
 /* harmony default export */ __webpack_exports__["a"] = (Vue);
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(0), __webpack_require__(2), __webpack_require__(11).setImmediate))
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1,eval)("this");
-} catch(e) {
-	// This works if the window reference is available
-	if(typeof window === "object")
-		g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-/* 3 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_router__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__cookie_js__ = __webpack_require__(4);
-
-
-
-
-__WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].use(__WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]);
-
-const router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
-  routes: [
-    {
-      path: '/login',
-      name: 'login',
-      component: function (resolve) {
-        __webpack_require__.e/* require */(1).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(21)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe)
-      },
-      beforeEnter: exceptLoggedIn,
-    },
-    {
-      path: '/signup',
-      name: 'signup',
-      component: function (resolve) {
-        __webpack_require__.e/* require */(2).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(22)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe)
-      },
-      beforeEnter: exceptLoggedIn,
-    },
-    {
-      path: '/',
-      component: function (resolve) {
-        __webpack_require__.e/* require */(0).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(23)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe)
-      },
-      beforeEnter: loggedInOnly,
-      children: [
-        {
-          path: '/',
-          name: 'home',
-          component: function (resolve) {
-            __webpack_require__.e/* require */(3).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(20)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe)
-          },
-          beforeEnter: loggedInOnly,
-        },
-      ]
-    },
-    {path: '*', redirect: '/'}
-  ]
-});
-
-function exceptLoggedIn(to, from, next) {
-  let sessionToken = __WEBPACK_IMPORTED_MODULE_2__cookie_js__["a" /* default */].get('sessionToken');//
-
-  if (sessionToken) {
-    let user = new Apiomat.FrontendUser();
-    user.setSessionToken(sessionToken);
-    Apiomat.Datastore.configureWithUserSessionToken(user);
-
-    user.loadMe({
-      onOk: result => {
-        next(false);
-      },
-      onError: error => {
-        next();
-      }
-    }, true);
-  } else {
-    next();
-  }
-}
-
-function loggedInOnly(to, from, next) {
-  let sessionToken = __WEBPACK_IMPORTED_MODULE_2__cookie_js__["a" /* default */].get('sessionToken');
-  let user = new Apiomat.FrontendUser();
-
-  Apiomat.Datastore.setCachingStrategy(Apiomat.AOMCacheStrategy.CACHE_ELSE_NETWORK);
-  Apiomat.Datastore.getInstance().setOfflineUsageForClass(Apiomat.FrontendUser, true);
-
-  if (!sessionToken) {
-    try {
-      user.initDatastoreIfNeeded();
-    } catch (error) {
-      next(false);
-      return;
-    }
-
-    user.requestSessionToken(true, {
-      onOk: result => {
-        __WEBPACK_IMPORTED_MODULE_2__cookie_js__["a" /* default */].set('sessionToken', result['sessionToken']);
-        next();
-      },
-      onError: error => {
-        next('/login');
-      }
-    });
-  } else {
-    user.setSessionToken(sessionToken);
-    Apiomat.Datastore.configureWithSessionToken(sessionToken);
-    user.loadMe({
-      onOk: result => {
-        next();
-      },
-      onError: error => {
-        if (to.path === '/login' || to.path === '/signup') {
-          next();
-        } else {
-          next('/login');
-        }
-      }
-    }, true);
-  }
-}
-
-/* harmony default export */ __webpack_exports__["a"] = (router);
-
-/***/ }),
-/* 4 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony default export */ __webpack_exports__["a"] = ((function () {
-  function get(cname) {
-    let name = cname + '=';
-    let decodedCookie = decodeURIComponent(document.cookie);
-    let ca = decodedCookie.split(';');
-    for (let i = 0; i < ca.length; i++) {
-      let c = ca[i];
-      while (c.charAt(0) === ' ') {
-        c = c.substring(1);
-      }
-      if (c.indexOf(name) === 0) {
-        return c.substring(name.length, c.length);
-      }
-    }
-    return false;
-  }
-
-  function set(name, value, expires) {
-    let date = new Date();
-    date.setTime(date.getTime() + expires);
-    document.cookie = name + '=' + value + ';'
-      + 'expires='+ date.toUTCString() + ';'
-      + 'path=/;';
-  }
-
-  function expireNow(name) {
-    document.cookie = name + '=; max-age=0; path=/';
-  }
-
-  return {
-    get: get,
-    set: set,
-    expireNow: expireNow
-  }
-})());
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(0), __webpack_require__(1), __webpack_require__(10).setImmediate))
 
 /***/ }),
 /* 5 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_cookie_js__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_router_js__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_eventBus_js__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_cookie_js__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_router_js__ = __webpack_require__(2);
 //
 //
 //
@@ -8576,7 +8575,7 @@ function loggedInOnly(to, from, next) {
 
 
 
-
+//import { EventBus } from './utils/eventBus.js';
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: 'App',
@@ -8589,7 +8588,7 @@ function loggedInOnly(to, from, next) {
 
     let self = this;
 
-    __WEBPACK_IMPORTED_MODULE_2__utils_eventBus_js__["a" /* EventBus */].$on('loggedOut', function () {
+    EventBus.$on('loggedOut', function () {
       __WEBPACK_IMPORTED_MODULE_0__utils_cookie_js__["a" /* default */].expireNow('sessionToken');
       localStorage.clear();
       __WEBPACK_IMPORTED_MODULE_1__utils_router_js__["a" /* default */].push('/login');
@@ -8688,7 +8687,7 @@ function toComment(sourceMap) {
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (immutable) */ __webpack_exports__["default"] = addStylesClient;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__listToStyles__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__listToStyles__ = __webpack_require__(16);
 /*
   MIT License http://www.opensource.org/licenses/mit-license.php
   Author Tobias Koppers @sokra
@@ -9027,22 +9026,11 @@ function normalizeComponent (
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(1);
-
-const EventBus = new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */]();
-/* harmony export (immutable) */ __webpack_exports__["a"] = EventBus;
-
-
-/***/ }),
-/* 10 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vee_validate__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__App_vue__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_router_js__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vee_validate__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__App_vue__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_router_js__ = __webpack_require__(2);
 
 
 
@@ -9051,10 +9039,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].use(__WEBPACK_IMPORTED_MODULE_1_vee_validate__["a" /* default */]);
 //Vue.config.productionTip = false;
 
+window.EventBus = new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */]();
+
 new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */]({
   router: __WEBPACK_IMPORTED_MODULE_3__utils_router_js__["a" /* default */],
   render: h => h(__WEBPACK_IMPORTED_MODULE_2__App_vue__["a" /* default */]),
 }).$mount('#app');
+
 
 (function () {
   'use strict';
@@ -9075,7 +9066,7 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */]({
 
 
 /***/ }),
-/* 11 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {var scope = (typeof self !== "undefined" && self) || window;
@@ -9129,7 +9120,7 @@ exports._unrefActive = exports.active = function(item) {
 };
 
 // setimmediate attaches itself to the global object
-__webpack_require__(12);
+__webpack_require__(11);
 // On some exotic environments, it's not clear which object `setimmediate` was
 // able to install onto.  Search each possibility in the same order as the
 // `setimmediate` library.
@@ -9140,10 +9131,10 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
                          (typeof global !== "undefined" && global.clearImmediate) ||
                          (this && this.clearImmediate);
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 12 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
@@ -9333,10 +9324,10 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(0)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(0)))
 
 /***/ }),
-/* 13 */
+/* 12 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -16364,18 +16355,18 @@ var index_esm = {
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(0)))
 
 /***/ }),
-/* 14 */
+/* 13 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_selector_type_script_index_0_App_vue__ = __webpack_require__(5);
 /* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_7ba5bd90_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_App_vue__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_7ba5bd90_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_App_vue__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_component_normalizer__ = __webpack_require__(8);
 var disposed = false
 function injectStyle (context) {
   if (disposed) return
-  __webpack_require__(15)
+  __webpack_require__(14)
 }
 /* script */
 
@@ -16422,13 +16413,13 @@ if (false) {(function () {
 
 
 /***/ }),
-/* 15 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(16);
+var content = __webpack_require__(15);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -16449,7 +16440,7 @@ if(false) {
 }
 
 /***/ }),
-/* 16 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(6)(false);
@@ -16463,7 +16454,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 
 /***/ }),
-/* 17 */
+/* 16 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -16498,7 +16489,7 @@ function listToStyles (parentId, list) {
 
 
 /***/ }),
-/* 18 */
+/* 17 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -19129,7 +19120,7 @@ if (inBrowser && window.Vue) {
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(0)))
 
 /***/ }),
-/* 19 */
+/* 18 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
