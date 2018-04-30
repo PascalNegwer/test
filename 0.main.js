@@ -307,10 +307,15 @@ if (false) {
 //
 
 /* harmony default export */ __webpack_exports__["a"] = ({
+  beforeCreate: function() {
+    this.bg = document.documentElement.className;
+    console.log(this.bg);
+  },
   name: "mainNav",
   data() {
     return {
       open: false,
+      bg: '',
     }
   },
   methods: {
@@ -487,7 +492,7 @@ exports = module.exports = __webpack_require__(6)(false);
 
 
 // module
-exports.push([module.i, "\n.nav[data-v-c4b8a052] {\n  width: 100%;\n  color: var(--grey);\n  position: fixed;\n  bottom: 0;\n  left: 0;\n  justify-content: space-between;\n  flex-wrap: nowrap;\n}\n.nav--dropdown[data-v-c4b8a052] {\n  position: absolute;\n  bottom: 100%;\n  justify-content: center;\n  visibility: hidden;\n  opacity: 0;\n  transition: opacity .15s ease-in-out, visibility .15s .15s;\n}\n.nav--visible[data-v-c4b8a052] {\n  visibility: visible;\n  opacity: 1;\n  transition: opacity .15s ease-in-out, visibility;\n}\n.nav__item[data-v-c4b8a052] {\n  width: 25%;\n  display: block;\n  text-align: center;\n  transition: background .15s ease-in-out;\n  position: relative;\n}\n.nav__item[data-v-c4b8a052]:active, .nav__item--active[data-v-c4b8a052] {\n  background: var(--white-50);\n}\n.nav__item--dropdown[data-v-c4b8a052] {\n  width: 100%;\n  background: var(--white-50);\n  margin-bottom: .2rem;\n}\n.nav__item--dropdown[data-v-c4b8a052]:active {\n  background: var(--white);\n}\n.nav__icon[data-v-c4b8a052] {\n  padding: 2rem 3rem 1rem 3rem;\n  width: 100%;\n  height: auto;\n  flex-shrink: 0;\n}\n.nav__text[data-v-c4b8a052] {\n  font-size: 1.2rem;\n  font-weight: 400;\n  text-transform: uppercase;\n  text-align: center;\n  padding-bottom: 2rem;\n}\n", ""]);
+exports.push([module.i, "\n.nav[data-v-c4b8a052] {\n  width: 100%;\n  color: var(--grey);\n  position: fixed;\n  bottom: 0;\n  left: 0;\n  justify-content: space-between;\n  flex-wrap: nowrap;\n}\n.nav--dropdown[data-v-c4b8a052] {\n  position: absolute;\n  bottom: 100%;\n  justify-content: center;\n  visibility: hidden;\n  opacity: 0;\n  transition: opacity .15s ease-in-out, visibility .15s .15s;\n}\n.nav--visible[data-v-c4b8a052] {\n  visibility: visible;\n  opacity: 1;\n  transition: opacity .15s ease-in-out, visibility;\n}\n.nav__item[data-v-c4b8a052] {\n  width: 25%;\n  display: block;\n  text-align: center;\n  transition: background .15s ease-in-out;\n  position: relative;\n}\n.nav__item[data-v-c4b8a052]:active, .nav__item--active[data-v-c4b8a052] {\n  background: var(--white-50);\n}\n.nav__item--dropdown[data-v-c4b8a052] {\n  display: block;\n  width: 100%;\n  background: var(--white-50);\n  margin-bottom: .2rem;\n  position: relative;\n}\n.nav__item--dropdown[data-v-c4b8a052]:before {\n  position: absolute;\n  background-attachment: fixed;\n}\n.nav__item--dropdown[data-v-c4b8a052]:active {\n  background: var(--white);\n}\n.nav__icon[data-v-c4b8a052] {\n  padding: 2rem 3rem 1rem 3rem;\n  width: 100%;\n  height: auto;\n  flex-shrink: 0;\n}\n.nav__text[data-v-c4b8a052] {\n  font-size: 1.2rem;\n  font-weight: 400;\n  text-transform: uppercase;\n  text-align: center;\n  padding-bottom: 2rem;\n}\n", ""]);
 
 // exports
 
@@ -621,7 +626,10 @@ var render = function() {
           [
             _c(
               "span",
-              { staticClass: "nav__item nav__item--dropdown" },
+              {
+                staticClass:
+                  "nav__item nav__item--dropdown u_gradient-background--blue"
+              },
               [
                 _c(
                   "router-link",
