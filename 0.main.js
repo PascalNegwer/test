@@ -305,9 +305,16 @@ if (false) {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["a"] = ({
-  beforeCreate: function() {
+  mounted: function() {
     this.bg = document.documentElement.className;
     console.log(this.bg);
   },
@@ -492,7 +499,7 @@ exports = module.exports = __webpack_require__(6)(false);
 
 
 // module
-exports.push([module.i, "\n.nav[data-v-c4b8a052] {\n  width: 100%;\n  color: var(--grey);\n  position: fixed;\n  bottom: 0;\n  left: 0;\n  justify-content: space-between;\n  flex-wrap: nowrap;\n}\n.nav--dropdown[data-v-c4b8a052] {\n  position: absolute;\n  bottom: 100%;\n  justify-content: center;\n  visibility: hidden;\n  opacity: 0;\n  transition: opacity .15s ease-in-out, visibility .15s .15s;\n  clip: rect(0, auto, auto, 0);\n}\n.nav--visible[data-v-c4b8a052] {\n  visibility: visible;\n  opacity: 1;\n  transition: opacity .15s ease-in-out, visibility;\n}\n.nav__item[data-v-c4b8a052] {\n  width: 25%;\n  display: block;\n  text-align: center;\n  transition: background .15s ease-in-out;\n  position: relative;\n}\n.nav__item[data-v-c4b8a052]:active, .nav__item--active[data-v-c4b8a052] {\n  background: var(--white-50);\n}\n.nav__item--dropdown[data-v-c4b8a052] {\n  display: block;\n  width: 100%;\n  background: var(--white-50);\n  margin-bottom: .2rem;\n  position: relative;\n}\n.nav__item--dropdown[data-v-c4b8a052]:active {\n  background: var(--white);\n}\n.nav__icon[data-v-c4b8a052] {\n  padding: 2rem 3rem 1rem 3rem;\n  width: 100%;\n  height: auto;\n  flex-shrink: 0;\n}\n.nav__text[data-v-c4b8a052] {\n  font-size: 1.2rem;\n  font-weight: 400;\n  text-transform: uppercase;\n  text-align: center;\n  padding-bottom: 2rem;\n}\n", ""]);
+exports.push([module.i, "\n.nav[data-v-c4b8a052] {\n  width: 100%;\n  color: var(--grey);\n  position: fixed;\n  bottom: 0;\n  left: 0;\n  justify-content: space-between;\n  flex-wrap: nowrap;\n}\n.nav--dropdown[data-v-c4b8a052] {\n  position: absolute;\n  bottom: 100%;\n  justify-content: center;\n  visibility: hidden;\n  opacity: 0;\n  transition: opacity .15s ease-in-out, visibility .15s .15s;\n  clip: rect(0, auto, auto, 0);\n}\n.nav--visible[data-v-c4b8a052] {\n  visibility: visible;\n  opacity: 1;\n  transition: opacity .15s ease-in-out, visibility;\n}\n.nav__item[data-v-c4b8a052] {\n  width: 25%;\n  display: block;\n  text-align: center;\n  transition: background .15s ease-in-out;\n  position: relative;\n}\n.nav__item[data-v-c4b8a052]:active, .nav__item--active[data-v-c4b8a052] {\n  background: var(--white-50);\n}\n.nav__item--dropdown[data-v-c4b8a052] {\n  display: block;\n  width: 100%;\n  background: var(--white-50);\n  margin-bottom: .2rem;\n  position: relative;\n}\n.nav__item--dropdown[data-v-c4b8a052]:active {\n  background: var(--white);\n}\n.nav__link[data-v-c4b8a052] {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n}\n.nav__icon[data-v-c4b8a052] {\n  padding: 2rem 0 1rem 0;\n  width: auto;\n  height: 6.2rem;\n  flex-shrink: 0;\n  position: relative;\n  transition: opacity .15s ease-in-out;\n  opacity: 1;\n  flex-shrink: 0;\n}\n.nav__icon--hidden[data-v-c4b8a052] {\n  opacity: 0;\n  position: absolute;\n  top: 0;\n  left: 50%;\n  transform: translateX(-50%);\n}\n.nav__text[data-v-c4b8a052] {\n  font-size: 1.2rem;\n  font-weight: 400;\n  text-transform: uppercase;\n  text-align: center;\n  padding-bottom: 2rem;\n}\n", ""]);
 
 // exports
 
@@ -610,7 +617,14 @@ var render = function() {
           [
             _c("img", {
               staticClass: "nav__icon",
-              attrs: { src: "assets/img/settings.svg" }
+              class: [_vm.open ? "" : "nav__icon--hidden"],
+              attrs: { src: "assets/img/close.svg" }
+            }),
+            _vm._v(" "),
+            _c("img", {
+              staticClass: "nav__icon",
+              class: [_vm.open ? "nav__icon--hidden" : ""],
+              attrs: { src: "assets/img/menu.svg" }
             }),
             _vm._v(" "),
             _c("p", { staticClass: "nav__text" }, [_vm._v("Settings")])
@@ -620,9 +634,8 @@ var render = function() {
         _c(
           "nav",
           {
-            staticClass:
-              "nav nav--dropdown l_flex  u_gradient-background--orange",
-            class: { "nav--visible": _vm.open }
+            staticClass: "nav nav--dropdown l_flex",
+            class: [{ "nav--visible": _vm.open }, _vm.bg]
           },
           [
             _c(
@@ -635,52 +648,72 @@ var render = function() {
                   [
                     _c("img", {
                       staticClass: "nav__icon",
-                      attrs: { src: "assets/img/home.svg" }
-                    }),
-                    _vm._v(" "),
-                    _c("p", { staticClass: "nav__text" }, [_vm._v("Home")])
-                  ]
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "span",
-              { staticClass: "nav__item nav__item--dropdown" },
-              [
-                _c(
-                  "router-link",
-                  { staticClass: "nav__link", attrs: { to: "#" } },
-                  [
-                    _c("img", {
-                      staticClass: "nav__icon",
-                      attrs: { src: "assets/img/dashboard.svg" }
-                    }),
-                    _vm._v(" "),
-                    _c("p", { staticClass: "nav__text" }, [_vm._v("Dashboard")])
-                  ]
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "span",
-              { staticClass: "nav__item nav__item--dropdown" },
-              [
-                _c(
-                  "router-link",
-                  { staticClass: "nav__link", attrs: { to: "#" } },
-                  [
-                    _c("img", {
-                      staticClass: "nav__icon",
-                      attrs: { src: "assets/img/list.svg" }
+                      attrs: { src: "assets/img/text.svg" }
                     }),
                     _vm._v(" "),
                     _c("p", { staticClass: "nav__text" }, [
-                      _vm._v("Funktionen")
+                      _vm._v("Rechtliches")
                     ])
+                  ]
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "span",
+              { staticClass: "nav__item nav__item--dropdown" },
+              [
+                _c(
+                  "router-link",
+                  { staticClass: "nav__link", attrs: { to: "/" } },
+                  [
+                    _c("img", {
+                      staticClass: "nav__icon",
+                      attrs: { src: "assets/img/info.svg" }
+                    }),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "nav__text" }, [_vm._v("Hilfe")])
+                  ]
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "span",
+              { staticClass: "nav__item nav__item--dropdown" },
+              [
+                _c(
+                  "router-link",
+                  { staticClass: "nav__link", attrs: { to: "#" } },
+                  [
+                    _c("img", {
+                      staticClass: "nav__icon",
+                      attrs: { src: "assets/img/user.svg" }
+                    }),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "nav__text" }, [_vm._v("Account")])
+                  ]
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "span",
+              { staticClass: "nav__item nav__item--dropdown" },
+              [
+                _c(
+                  "router-link",
+                  { staticClass: "nav__link", attrs: { to: "#" } },
+                  [
+                    _c("img", {
+                      staticClass: "nav__icon",
+                      attrs: { src: "assets/img/logout.svg" }
+                    }),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "nav__text" }, [_vm._v("Logout")])
                   ]
                 )
               ],
