@@ -1111,7 +1111,6 @@ if (false) {
 //
 //
 //
-//
 
 
 
@@ -1308,7 +1307,7 @@ exports = module.exports = __webpack_require__(6)(false);
 
 
 // module
-exports.push([module.i, "\n.nav {\n  width: 100%;\n  color: var(--grey);\n  position: fixed;\n  bottom: 0;\n  left: 0;\n  justify-content: space-between;\n  flex-wrap: nowrap;\n}\n.nav--dropdown {\n  position: absolute;\n  bottom: 100%;\n  justify-content: center;\n  visibility: hidden;\n  opacity: 0;\n  transition: opacity .15s ease-in-out, visibility .15s .15s;\n  clip: rect(0, auto, auto, 0);\n}\n.nav--visible {\n  visibility: visible;\n  opacity: 1;\n  transition: opacity .15s ease-in-out, visibility;\n}\n.nav__item {\n  width: 25%;\n  display: block;\n  text-align: center;\n  transition: background .15s ease-in-out;\n  position: relative;\n}\n.nav__item:active, .nav__item--active {\n  background: var(--white-50);\n}\n.nav__item--dropdown {\n  display: block;\n  width: 100%;\n  background: var(--white-50);\n  margin-bottom: .2rem;\n  position: relative;\n}\n.nav__item--dropdown:active {\n  background: var(--white);\n}\n.nav__link {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n}\n.nav__icon {\n  padding: 2rem 0 1rem 0;\n  width: auto;\n  height: 6.2rem;\n  flex-shrink: 0;\n  position: relative;\n  transition: opacity .15s ease-in-out;\n  opacity: 1;\n  flex-shrink: 0;\n}\n.nav__icon--hidden {\n  opacity: 0;\n  position: absolute;\n  top: 0;\n  left: 50%;\n  transform: translateX(-50%);\n}\n.nav__text {\n  font-size: 1.2rem;\n  font-weight: 400;\n  text-transform: uppercase;\n  text-align: center;\n  padding-bottom: 2rem;\n}\n", ""]);
+exports.push([module.i, "\n.nav {\n  width: 100%;\n  color: var(--grey);\n  position: fixed;\n  bottom: 0;\n  left: 0;\n  justify-content: space-between;\n  flex-wrap: nowrap;\n}\n.nav--dropdown {\n  position: absolute;\n  bottom: 100%;\n  justify-content: center;\n  visibility: hidden;\n  opacity: 0;\n  transition: opacity .15s ease-in-out, visibility .15s .15s;\n  clip: rect(0, auto, auto, 0);\n}\n.nav--visible {\n  visibility: visible;\n  opacity: 1;\n  transition: opacity .15s ease-in-out, visibility;\n}\n.nav__item {\n  width: 25%;\n  display: block;\n  text-align: center;\n  transition: background .15s ease-in-out;\n  position: relative;\n}\n.nav__item:active, .nav__item--active {\n  background: var(--white-50);\n}\n.nav__item--dropdown {\n  display: block;\n  width: 100%;\n  background: var(--white-50);\n  margin-bottom: .2rem;\n  position: relative;\n}\n.nav__item--dropdown:active {\n  background: var(--white);\n}\n.nav__link {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n}\n.nav__icon {\n  padding: 2rem 0 1rem 0;\n  font-size: 3.2rem;\n  color: #5f5f5f;\n}\n.nav__icon:before {\n  transition: color .15s ease-in-out;\n}\n.nav__text {\n  font-size: 1.2rem;\n  font-weight: 400;\n  text-transform: uppercase;\n  text-align: center;\n  padding-bottom: 2rem;\n  transition: color .15s ease-in-out;\n}\n.u_gradient-background--default .nav__icon, .u_gradient-background--mixed .nav__icon {\n  color: var(--lightgrey);\n}\n.u_gradient-background--default .nav__text, .u_gradient-background--mixed .nav__text {\n  color: var(--lightgrey);\n}\n", ""]);
 
 // exports
 
@@ -1424,10 +1423,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("span", { staticClass: "nav__link", on: { click: _vm.logout } }, [
-    _c("img", {
-      staticClass: "nav__icon",
-      attrs: { src: "assets/img/logout.svg" }
-    }),
+    _c("div", { staticClass: "nav__icon u_icon--logout" }),
     _vm._v(" "),
     _c("p", { staticClass: "nav__text" }, [_vm._v("Logout")])
   ])
@@ -1470,10 +1466,7 @@ var render = function() {
             }
           },
           [
-            _c("img", {
-              staticClass: "nav__icon",
-              attrs: { src: "assets/img/home.svg" }
-            }),
+            _c("div", { staticClass: "nav__icon u_icon--home" }),
             _vm._v(" "),
             _c("p", { staticClass: "nav__text" }, [_vm._v("Home")])
           ]
@@ -1498,10 +1491,7 @@ var render = function() {
             }
           },
           [
-            _c("img", {
-              staticClass: "nav__icon",
-              attrs: { src: "assets/img/dashboard.svg" }
-            }),
+            _c("div", { staticClass: "nav__icon u_icon--dashboard" }),
             _vm._v(" "),
             _c("p", { staticClass: "nav__text" }, [_vm._v("Dashboard")])
           ]
@@ -1526,10 +1516,7 @@ var render = function() {
             }
           },
           [
-            _c("img", {
-              staticClass: "nav__icon",
-              attrs: { src: "assets/img/list.svg" }
-            }),
+            _c("div", { staticClass: "nav__icon u_icon--list" }),
             _vm._v(" "),
             _c("p", { staticClass: "nav__text" }, [_vm._v("Funktionen")])
           ]
@@ -1553,16 +1540,9 @@ var render = function() {
             }
           },
           [
-            _c("img", {
+            _c("div", {
               staticClass: "nav__icon",
-              class: [_vm.open ? "" : "nav__icon--hidden"],
-              attrs: { src: "assets/img/close.svg" }
-            }),
-            _vm._v(" "),
-            _c("img", {
-              staticClass: "nav__icon",
-              class: [_vm.open ? "nav__icon--hidden" : ""],
-              attrs: { src: "assets/img/menu.svg" }
+              class: [_vm.open ? "u_icon--close" : "u_icon--menu"]
             }),
             _vm._v(" "),
             _c("p", { staticClass: "nav__text" }, [_vm._v("Settings")])
@@ -1592,10 +1572,7 @@ var render = function() {
                     }
                   },
                   [
-                    _c("img", {
-                      staticClass: "nav__icon",
-                      attrs: { src: "assets/img/text.svg" }
-                    }),
+                    _c("div", { staticClass: "nav__icon u_icon--text" }),
                     _vm._v(" "),
                     _c("p", { staticClass: "nav__text" }, [
                       _vm._v("Rechtliches")
@@ -1622,10 +1599,7 @@ var render = function() {
                     }
                   },
                   [
-                    _c("img", {
-                      staticClass: "nav__icon",
-                      attrs: { src: "assets/img/info.svg" }
-                    }),
+                    _c("div", { staticClass: "nav__icon u_icon--info" }),
                     _vm._v(" "),
                     _c("p", { staticClass: "nav__text" }, [_vm._v("Hilfe")])
                   ]
@@ -1650,10 +1624,7 @@ var render = function() {
                     }
                   },
                   [
-                    _c("img", {
-                      staticClass: "nav__icon",
-                      attrs: { src: "assets/img/user.svg" }
-                    }),
+                    _c("div", { staticClass: "nav__icon u_icon--user" }),
                     _vm._v(" "),
                     _c("p", { staticClass: "nav__text" }, [_vm._v("Account")])
                   ]
