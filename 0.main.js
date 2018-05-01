@@ -489,8 +489,14 @@ if (false) {(function () {
           name: 'Standard',
           active: true,
         },
-        { name: 'Nebenjob' },
-        { name: 'Zuhause' }
+        { 
+          name: 'Nebenjob',
+          active: false
+        },
+        { 
+          name: 'Zuhause',
+          active: false,
+        }
       ]
     }
   },
@@ -501,6 +507,18 @@ if (false) {(function () {
       } else {
         this.open = true;
       }
+    },
+    toggleActive(profile) {
+      for(let i = 0; i < this.profiles.length; i++) {
+        if(this.profiles[i].active) {
+          this.profiles[i].active = false;
+        }
+      }
+      profile.active = true;
+    },
+    functionHandler(state, profile) {
+      this.toggleDropdown(state);
+      this.toggleActive(profile);
     }
   }
 });
@@ -802,7 +820,12 @@ var render = function() {
           "span",
           {
             staticClass: "tiles__tile",
-            class: { "tiles__tile--active": profile.active }
+            class: { "tiles__tile--active": profile.active },
+            on: {
+              click: function($event) {
+                _vm.functionHandler(true, profile)
+              }
+            }
           },
           [_vm._v("\n    " + _vm._s(profile.name) + "\n  ")]
         )
