@@ -20268,7 +20268,11 @@ var render = function() {
                 }
               ],
               staticClass: "inp inp--18",
-              attrs: { placeholder: "E-Mail-Adresse", required: "" },
+              attrs: {
+                type: "email",
+                placeholder: "E-Mail-Adresse",
+                required: ""
+              },
               domProps: { value: _vm.user.data.userName },
               on: {
                 input: function($event) {
@@ -20506,7 +20510,11 @@ var render = function() {
                 }
               ],
               staticClass: "inp inp--18",
-              attrs: { placeholder: "E-Mail-Adresse", required: "" },
+              attrs: {
+                type: "email",
+                placeholder: "E-Mail-Adresse",
+                required: ""
+              },
               domProps: { value: _vm.user.data.userName },
               on: {
                 input: function($event) {
