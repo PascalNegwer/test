@@ -17432,7 +17432,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.flash-messages-container[data-v-7ba5bd90] {\n  top: 10px;\n  left: 50%;\n  transform: translateX(-50%);\n  z-index: 100;\n  width: 100% ;\n  padding: 0 2rem;\n  position: fixed;\n  display: flex;\n  flex-direction: column;\n}\n.flash-message[data-v-7ba5bd90] {\n  align-items: center;\n  display: flex;\n  font-family: 'Comfortaa', sans-serif;\n  background: var(--white);\n  font-size: 1.8rem;\n  margin-bottom: 1rem;\n  border: var(--white) 1px solid;\n  padding: 2rem 1.5rem;\n}\n.flash-message__text[data-v-7ba5bd90] {\n  padding-left: 10px;\n  flex-shrink: 1;\n}\n.flash-message[data-v-7ba5bd90]:before {\n  font-weight: 800;\n  font-size: 4rem;\n}\n.flash-message--warning[data-v-7ba5bd90] {\n  border-color: var(--warning);\n  color: var(--warning);\n}\n.flash-message--success[data-v-7ba5bd90] {\n  border-color: var(--success);\n  color: var(--success);\n}\n.flash-message--error[data-v-7ba5bd90] {\n  border-color: var(--error);\n  color: var(--error);\n}\n.slide-fade-enter-active[data-v-7ba5bd90] {\n  transition: all .5s ease;\n}\n.slide-fade-leave-active[data-v-7ba5bd90] {\n  transition: all .6s cubic-bezier(1.0, 0.5, 0.8, 1.0);\n}\n.slide-fade-enter[data-v-7ba5bd90], .slide-fade-leave-to[data-v-7ba5bd90] {\n  transform: translateY(40px);\n  opacity: 0;\n}\n", ""]);
+exports.push([module.i, "\n.flash-messages-container[data-v-7ba5bd90] {\n  top: 4rem;\n  left: 50%;\n  transform: translateX(-50%);\n  z-index: 100;\n  width: 100%;\n  padding: 0 3rem;\n  position: fixed;\n  display: flex;\n  flex-direction: column;\n}\n.flash-message[data-v-7ba5bd90] {\n  align-items: center;\n  display: flex;\n  font-family: 'Comfortaa', sans-serif;\n  background: var(--white);\n  font-weight: 300;\n  font-size: 1.6rem;\n  line-height: 1.5;\n  margin-bottom: 1rem;\n  border: var(--white) 1px solid;\n  padding: 2rem 1.5rem;\n}\n.flash-message__text[data-v-7ba5bd90] {\n  padding-left: 1.5rem;\n  flex-shrink: 1;\n}\n.flash-message[data-v-7ba5bd90]:before {\n  font-size: 4rem;\n}\n.flash-message--warning[data-v-7ba5bd90] {\n  border-color: var(--warning);\n  color: var(--warning);\n}\n.flash-message--success[data-v-7ba5bd90] {\n  border-color: var(--success);\n  color: var(--success);\n}\n.flash-message--error[data-v-7ba5bd90] {\n  border-color: var(--error);\n  color: var(--error);\n}\n.slide-fade-enter-active[data-v-7ba5bd90] {\n  transition: all .5s ease;\n}\n.slide-fade-leave-active[data-v-7ba5bd90] {\n  transition: all .6s cubic-bezier(1.0, 0.5, 0.8, 1.0);\n}\n.slide-fade-enter[data-v-7ba5bd90], .slide-fade-leave-to[data-v-7ba5bd90] {\n  transform: translateY(-40px);\n  opacity: 0;\n}\n", ""]);
 
 // exports
 
@@ -21832,7 +21832,7 @@ var render = function() {
                   }
                 },
                 [
-                  _c("b", { staticClass: "flash-message__text" }, [
+                  _c("p", { staticClass: "flash-message__text" }, [
                     _vm._v(_vm._s(flashMessage.message))
                   ])
                 ]
