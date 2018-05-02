@@ -9082,6 +9082,7 @@ if (inBrowser) {
       this.user.loadMe({
         onOk: result => {
           __WEBPACK_IMPORTED_MODULE_0__utils_router_js__["a" /* default */].push('/');
+          this.loading = false;
         },
         onError: error => {
           switch (error.statusCode) {
@@ -9097,9 +9098,9 @@ if (inBrowser) {
               console.log(error);
           }
           EventBus.$emit('error', this.error);
+          this.loading = false;
         }
       });
-      this.loading = false;
     }
   }
 });
@@ -9186,9 +9187,6 @@ const SUCCESS = 'success';
       loading: false
     }
   },
-  beforeUpdate: function () {
-    this.loading = false;
-  },
   methods: {
     save() {
       this.loading = true;
@@ -9198,6 +9196,7 @@ const SUCCESS = 'success';
         this.error.message = 'Bitte gib eine gültige E-Mail-Adresse ein.';
         this.error.type = __WEBPACK_IMPORTED_MODULE_2__classes_ErrorTypes__["b" /* WARNING */];
         EventBus.$emit('error', this.error);
+        this.loading = false;
         return;
       }
 
@@ -9205,6 +9204,7 @@ const SUCCESS = 'success';
         this.error.message = 'Die eingegebenen Passwörter stimmen nicht überein.';
         this.error.type = __WEBPACK_IMPORTED_MODULE_2__classes_ErrorTypes__["b" /* WARNING */];
         EventBus.$emit('error', this.error);
+        this.loading = false;
         return;
       }
 
@@ -9213,6 +9213,7 @@ const SUCCESS = 'success';
       this.user.save({
         onOk: result => {
           __WEBPACK_IMPORTED_MODULE_0__utils_router_js__["a" /* default */].push('/');
+          this.loading = false;
 
           setTimeout(function () {
             let error = new Error();
@@ -9220,7 +9221,6 @@ const SUCCESS = 'success';
             error.type = __WEBPACK_IMPORTED_MODULE_2__classes_ErrorTypes__["a" /* SUCCESS */];
             EventBus.$emit('error', error);
           }, 1000);
-
         },
         onError: error => {
           switch (error.statusCode) {
@@ -9237,6 +9237,7 @@ const SUCCESS = 'success';
               console.log(error);
           }
           EventBus.$emit('error', this.error);
+          this.loading = false;
         }
       });
     }
