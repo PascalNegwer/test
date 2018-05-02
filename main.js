@@ -9063,9 +9063,6 @@ if (inBrowser) {
       error: new Error(),
     }
   },
-  beforeUpdate: function () {
-    this.loading = false;
-  },
   methods: {
     login() {
       this.loading = true;
@@ -9075,6 +9072,7 @@ if (inBrowser) {
         this.error.message = 'Bitte gib eine gültige E-Mail-Adresse ein.';
         this.error.type = __WEBPACK_IMPORTED_MODULE_3__classes_ErrorTypes__["b" /* WARNING */];
         EventBus.$emit('error', this.error);
+        this.loading = false;
         return;
       }
 
@@ -9101,6 +9099,7 @@ if (inBrowser) {
           EventBus.$emit('error', this.error);
         }
       });
+      this.loading = false;
     }
   }
 });
