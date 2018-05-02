@@ -19902,7 +19902,7 @@ var render = function() {
       _vm._v(" "),
       _c("router-view", { attrs: { user: _vm.user } }),
       _vm._v(" "),
-      _c("main-nav")
+      _vm.isMain() ? _c("main-nav") : _vm._e()
     ],
     1
   )
