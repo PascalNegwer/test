@@ -9063,6 +9063,9 @@ if (inBrowser) {
       error: new Error(),
     }
   },
+  beforeMount: function () {
+    this.loading = false;
+  },
   methods: {
     login() {
       this.loading = true;
@@ -9082,7 +9085,6 @@ if (inBrowser) {
       this.user.loadMe({
         onOk: result => {
           __WEBPACK_IMPORTED_MODULE_0__utils_router_js__["a" /* default */].push('/');
-          this.loading = false;
         },
         onError: error => {
           switch (error.statusCode) {
@@ -9187,6 +9189,9 @@ const SUCCESS = 'success';
       loading: false
     }
   },
+  beforeMount: function () {
+    this.loading = false;
+  },
   methods: {
     save() {
       this.loading = true;
@@ -9213,7 +9218,6 @@ const SUCCESS = 'success';
       this.user.save({
         onOk: result => {
           __WEBPACK_IMPORTED_MODULE_0__utils_router_js__["a" /* default */].push('/');
-          this.loading = false;
 
           setTimeout(function () {
             let error = new Error();
