@@ -19727,56 +19727,49 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "section",
-      {
-        staticClass: "timer__count-container",
-        staticStyle: { height: "500px" }
-      },
-      [
-        _c("div", { staticClass: "timer__count-wrapper" }, [
-          _c("h2", { staticClass: "timer__label" }, [
-            _vm._v("Gesamte Arbeitszeit")
-          ]),
-          _vm._v(" "),
-          _c("p", { staticClass: "timer__count" }, [
-            _c("span", { staticClass: "timer__hours" }, [_vm._v("00")]),
-            _vm._v("\n        :\n        "),
-            _c("span", { staticClass: "timer__minutes" }, [_vm._v("00")]),
-            _vm._v("\n        :\n        "),
-            _c("span", { staticClass: "timer__seconds" }, [_vm._v("00")])
-          ])
+    return _c("section", { staticClass: "timer__count-container" }, [
+      _c("div", { staticClass: "timer__count-wrapper" }, [
+        _c("h2", { staticClass: "timer__label" }, [
+          _vm._v("Gesamte Arbeitszeit")
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "timer__count-wrapper" }, [
-          _c("h2", { staticClass: "timer__label" }, [
-            _vm._v("Aktuelle Arbeits-/Pausenzeit")
-          ]),
-          _vm._v(" "),
-          _c("p", { staticClass: "timer__count timer__count--small" }, [
-            _c("span", { staticClass: "timer__hours" }, [_vm._v("00")]),
-            _vm._v("\n        :\n        "),
-            _c("span", { staticClass: "timer__minutes" }, [_vm._v("00")]),
-            _vm._v("\n        :\n        "),
-            _c("span", { staticClass: "timer__seconds" }, [_vm._v("00")])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "timer__count-wrapper" }, [
-          _c("h2", { staticClass: "timer__label" }, [
-            _vm._v("Gesamte Pausenzeit")
-          ]),
-          _vm._v(" "),
-          _c("p", { staticClass: "timer__count timer__count--small" }, [
-            _c("span", { staticClass: "timer__hours" }, [_vm._v("00")]),
-            _vm._v("\n        :\n        "),
-            _c("span", { staticClass: "timer__minutes" }, [_vm._v("00")]),
-            _vm._v("\n        :\n        "),
-            _c("span", { staticClass: "timer__seconds" }, [_vm._v("00")])
-          ])
+        _c("p", { staticClass: "timer__count" }, [
+          _c("span", { staticClass: "timer__hours" }, [_vm._v("00")]),
+          _vm._v("\n        :\n        "),
+          _c("span", { staticClass: "timer__minutes" }, [_vm._v("00")]),
+          _vm._v("\n        :\n        "),
+          _c("span", { staticClass: "timer__seconds" }, [_vm._v("00")])
         ])
-      ]
-    )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "timer__count-wrapper" }, [
+        _c("h2", { staticClass: "timer__label" }, [
+          _vm._v("Aktuelle Arbeits-/Pausenzeit")
+        ]),
+        _vm._v(" "),
+        _c("p", { staticClass: "timer__count timer__count--small" }, [
+          _c("span", { staticClass: "timer__hours" }, [_vm._v("00")]),
+          _vm._v("\n        :\n        "),
+          _c("span", { staticClass: "timer__minutes" }, [_vm._v("00")]),
+          _vm._v("\n        :\n        "),
+          _c("span", { staticClass: "timer__seconds" }, [_vm._v("00")])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "timer__count-wrapper" }, [
+        _c("h2", { staticClass: "timer__label" }, [
+          _vm._v("Gesamte Pausenzeit")
+        ]),
+        _vm._v(" "),
+        _c("p", { staticClass: "timer__count timer__count--small" }, [
+          _c("span", { staticClass: "timer__hours" }, [_vm._v("00")]),
+          _vm._v("\n        :\n        "),
+          _c("span", { staticClass: "timer__minutes" }, [_vm._v("00")]),
+          _vm._v("\n        :\n        "),
+          _c("span", { staticClass: "timer__seconds" }, [_vm._v("00")])
+        ])
+      ])
+    ])
   }
 ]
 render._withStripped = true
