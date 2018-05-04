@@ -681,7 +681,7 @@ process.umask = function() { return 0; };
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_router__ = __webpack_require__(46);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__cookie_js__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Login_vue__ = __webpack_require__(47);
@@ -794,7 +794,7 @@ function loggedInOnly(to, from, next) {
   EventBus.$emit('clearFlashMessages');
   let sessionToken = __WEBPACK_IMPORTED_MODULE_2__cookie_js__["a" /* default */].get('sessionToken');
 
-  Apiomat.Datastore.setCachingStrategy(Apiomat.AOMCacheStrategy.CACHE_ELSE_NETWORK);
+  Apiomat.Datastore.setCachingStrategy(Apiomat.AOMCacheStrategy.NETWORK_ELSE_CACHE);
   Apiomat.Datastore.getInstance().setOfflineUsageForClass(Apiomat.FrontendUser, true);
 
   if (!sessionToken) {
@@ -904,6 +904,21 @@ module.exports = g;
 
 /***/ }),
 /* 7 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+const WARNING = 'warning';
+/* harmony export (immutable) */ __webpack_exports__["c"] = WARNING;
+
+const ERROR = 'error';
+/* harmony export (immutable) */ __webpack_exports__["a"] = ERROR;
+
+const SUCCESS = 'success';
+/* harmony export (immutable) */ __webpack_exports__["b"] = SUCCESS;
+
+
+/***/ }),
+/* 8 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8943,7 +8958,7 @@ if (inBrowser) {
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(3), __webpack_require__(5), __webpack_require__(31).setImmediate))
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -9017,7 +9032,7 @@ if (inBrowser) {
 
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -9115,7 +9130,7 @@ if (inBrowser) {
 
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -9138,14 +9153,16 @@ if (inBrowser) {
 
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_router_js__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_validate_js__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_validate_js__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_cookie_js__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__classes_MessageTypes__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__classes_MessageTypes__ = __webpack_require__(7);
+//
+//
 //
 //
 //
@@ -9196,7 +9213,7 @@ if (inBrowser) {
       EventBus.$emit('clearFlashMessages');
 
       if (!__WEBPACK_IMPORTED_MODULE_1__utils_validate_js__["a" /* default */].email(this.$user.getUserName())) {
-        EventBus.$emit('newMessage', {message: 'Bitte gib eine gültige E-Mail-Adresse ein.', type: __WEBPACK_IMPORTED_MODULE_3__classes_MessageTypes__["a" /* WARNING */]});
+        EventBus.$emit('newMessage', {message: 'Bitte gib eine gültige E-Mail-Adresse ein.', type: __WEBPACK_IMPORTED_MODULE_3__classes_MessageTypes__["c" /* WARNING */]});
         this.loading = false;
         return;
       }
@@ -9211,10 +9228,10 @@ if (inBrowser) {
         onError: error => {
           switch (error.statusCode) {
             case 615:
-              EventBus.$emit('newMessage', {message: 'Oops! Scheint als hättest du keine Internetverbindung.', type: __WEBPACK_IMPORTED_MODULE_3__classes_MessageTypes__["a" /* WARNING */]});
+              EventBus.$emit('newMessage', {message: 'Oops! Scheint als hättest du keine Internetverbindung.', type: __WEBPACK_IMPORTED_MODULE_3__classes_MessageTypes__["c" /* WARNING */]});
               break;
             case 840:
-              EventBus.$emit('newMessage', {message: 'Die eingegebene E-Mail-Adresse oder das Kennwort ist inkorrekt.', type: __WEBPACK_IMPORTED_MODULE_3__classes_MessageTypes__["a" /* WARNING */]});
+              EventBus.$emit('newMessage', {message: 'Die eingegebene E-Mail-Adresse oder das Kennwort ist inkorrekt.', type: __WEBPACK_IMPORTED_MODULE_3__classes_MessageTypes__["c" /* WARNING */]});
               break;
             default:
               console.log(error);
@@ -9228,7 +9245,7 @@ if (inBrowser) {
 
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -9243,28 +9260,15 @@ if (inBrowser) {
 })());
 
 /***/ }),
-/* 13 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-const WARNING = 'warning';
-/* harmony export (immutable) */ __webpack_exports__["a"] = WARNING;
-
-const ERROR = 'error';
-/* unused harmony export ERROR */
-
-const SUCCESS = 'success';
-/* unused harmony export SUCCESS */
-
-
-/***/ }),
 /* 14 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_router_js__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_validate_js__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__classes_MessageTypes__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_validate_js__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__classes_MessageTypes__ = __webpack_require__(7);
+//
+//
 //
 //
 //
@@ -9317,13 +9321,13 @@ const SUCCESS = 'success';
       EventBus.$emit('clearFlashMessages');
 
       if (!__WEBPACK_IMPORTED_MODULE_1__utils_validate_js__["a" /* default */].email(this.$user.getUserName())) {
-        EventBus.$emit('newMessage', {message: 'Bitte gib eine gültige E-Mail-Adresse ein.', type: __WEBPACK_IMPORTED_MODULE_2__classes_MessageTypes__["a" /* WARNING */]});
+        EventBus.$emit('newMessage', {message: 'Bitte gib eine gültige E-Mail-Adresse ein.', type: __WEBPACK_IMPORTED_MODULE_2__classes_MessageTypes__["c" /* WARNING */]});
         this.loading = false;
         return;
       }
 
       if (this.confirmPassword !== this.$user.getPassword()) {
-        EventBus.$emit('newMessage', {message: 'Die eingegebenen Passwörter stimmen nicht überein.', type: __WEBPACK_IMPORTED_MODULE_2__classes_MessageTypes__["a" /* WARNING */]});
+        EventBus.$emit('newMessage', {message: 'Die eingegebenen Passwörter stimmen nicht überein.', type: __WEBPACK_IMPORTED_MODULE_2__classes_MessageTypes__["c" /* WARNING */]});
         this.loading = false;
         return;
       }
@@ -9335,17 +9339,17 @@ const SUCCESS = 'success';
           __WEBPACK_IMPORTED_MODULE_0__utils_router_js__["a" /* default */].push('/');
 
           setTimeout(function () {
-            EventBus.$emit('newMessage', {message: 'Dein Account wurde erfolgreich registriert', type: __WEBPACK_IMPORTED_MODULE_2__classes_MessageTypes__["a" /* WARNING */]});
+            EventBus.$emit('newMessage', {message: 'Dein Account wurde erfolgreich registriert', type: __WEBPACK_IMPORTED_MODULE_2__classes_MessageTypes__["c" /* WARNING */]});
           }, 1000);
         },
         onError: error => {
           switch (error.statusCode) {
             case 0:
             case 615:
-              EventBus.$emit('newMessage', {message: 'Oops! Scheint als hättest du keine Internetverbindung.', type: __WEBPACK_IMPORTED_MODULE_2__classes_MessageTypes__["a" /* WARNING */]});
+              EventBus.$emit('newMessage', {message: 'Oops! Scheint als hättest du keine Internetverbindung.', type: __WEBPACK_IMPORTED_MODULE_2__classes_MessageTypes__["c" /* WARNING */]});
               break;
             case 830:
-              EventBus.$emit('newMessage', {message: 'Es existiert schon ein Account mit dieser E-Mail-Adresse.', type: __WEBPACK_IMPORTED_MODULE_2__classes_MessageTypes__["a" /* WARNING */]});
+              EventBus.$emit('newMessage', {message: 'Es existiert schon ein Account mit dieser E-Mail-Adresse.', type: __WEBPACK_IMPORTED_MODULE_2__classes_MessageTypes__["c" /* WARNING */]});
               break;
             default:
               console.log(error);
@@ -9910,6 +9914,7 @@ if (false) {(function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__classes_MessageTypes__ = __webpack_require__(7);
 //
 //
 //
@@ -9930,18 +9935,46 @@ if (false) {(function () {
 //
 //
 
+
+
 /* harmony default export */ __webpack_exports__["a"] = ({
-  beforeCreate: function() {
-    document.documentElement.className = 'u_gradient-background--mixed';
-  },
-  name: 'account',
-  props: [],
-  data() {
-    return {
+    beforeCreate: function () {
+        document.documentElement.className = 'u_gradient-background--mixed';
+    },
+    name: 'account',
+    props: [],
+    data() {
+        return {}
+    },
+    methods: {
+        save: function () {
+
+
+            this.$user.save({
+                onOk: result => {
+                    EventBus.$emit('newMessage', {
+                        message: 'Deine Accountdaten wurden erfolgreich geändert', type: __WEBPACK_IMPORTED_MODULE_0__classes_MessageTypes__["b" /* SUCCESS */]
+                    });
+                },
+                onError: error => {
+                    switch (error.statusCode) {
+                        case 0:
+                        case 615:
+                            EventBus.$emit('newMessage', {
+                                message: 'Oops! Scheint als hättest du keine Internetverbindung.',
+                                type: __WEBPACK_IMPORTED_MODULE_0__classes_MessageTypes__["c" /* WARNING */]
+                            });
+                            break;
+                        default:
+                            console.log(error);
+                            EventBus.$emit('newMessage', {
+                                message: 'Oops! Unbekannter Fehler.', type: __WEBPACK_IMPORTED_MODULE_0__classes_MessageTypes__["a" /* ERROR */]
+                            });
+                    }
+                },
+            });
+        }
     }
-  },
-  methods: {
-  }
 });
 
 
@@ -10154,7 +10187,7 @@ if (false) {(function () {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vee_validate__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__App_vue__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_router_js__ = __webpack_require__(4);
@@ -15533,7 +15566,7 @@ var index_esm = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_selector_type_script_index_0_App_vue__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_selector_type_script_index_0_App_vue__ = __webpack_require__(9);
 /* unused harmony namespace reexport */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_04c2046b_hasScoped_true_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_App_vue__ = __webpack_require__(85);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_component_normalizer__ = __webpack_require__(2);
@@ -15667,7 +15700,7 @@ function listToStyles (parentId, list) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_selector_type_script_index_0_MainNav_vue__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_selector_type_script_index_0_MainNav_vue__ = __webpack_require__(10);
 /* unused harmony namespace reexport */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_c4b8a052_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_MainNav_vue__ = __webpack_require__(45);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_component_normalizer__ = __webpack_require__(2);
@@ -15766,7 +15799,7 @@ exports.push([module.i, "\n.nav {\n  width: 100%;\n  color: var(--grey);\n  posi
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_selector_type_script_index_0_Logout_vue__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_selector_type_script_index_0_Logout_vue__ = __webpack_require__(11);
 /* unused harmony namespace reexport */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_873da226_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Logout_vue__ = __webpack_require__(44);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_component_normalizer__ = __webpack_require__(2);
@@ -18740,7 +18773,7 @@ if (inBrowser && window.Vue) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_selector_type_script_index_0_Login_vue__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_selector_type_script_index_0_Login_vue__ = __webpack_require__(12);
 /* unused harmony namespace reexport */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_9fcfedee_hasScoped_true_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Login_vue__ = __webpack_require__(50);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_component_normalizer__ = __webpack_require__(2);
@@ -18829,7 +18862,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.logo[data-v-9fcfedee] {\n  width: 40%;\n}\n.btn[data-v-9fcfedee] {\n  width: 65%;\n  margin-top: auto;\n}\n.inp[data-v-9fcfedee] {\n  margin: 1rem 0;\n}\n.l_wrapper[data-v-9fcfedee] {\n  justify-content: flex-start;\n}\n.link[data-v-9fcfedee] {\n  font-size: 1.8rem;\n  line-height: 2;\n  transition: color .15s ease-in-out;\n  justify-content: flex-end;\n}\n.link[data-v-9fcfedee]:active {\n  opacity: .5;\n}\n.content[data-v-9fcfedee] {\n  justify-content: center;\n  opacity: 1;\n  transition: opacity .15s ease-in-out, visibility .15s ease-in-out .15s;\n}\n.content--hidden[data-v-9fcfedee] {\n  opacity: 0;\n  visibility: hidden;\n}\n.loader[data-v-9fcfedee] {\n  top: 50%;\n  left: 50%;\n  transform: translateX(-50%);\n  opacity: 0;\n  visibility: hidden;\n  transition: opacity .15s ease-in-out;\n}\n.loader--active[data-v-9fcfedee] {\n  visibility: visible;\n  opacity: 1;\n}\n", ""]);
+exports.push([module.i, "\n.logo[data-v-9fcfedee] {\n  width: 40%;\n}\n.btn[data-v-9fcfedee] {\n  width: 65%;\n  margin-top: auto;\n}\n.inp[data-v-9fcfedee] {\n  margin: 1rem 0;\n}\n.l_wrapper[data-v-9fcfedee] {\n  justify-content: flex-start;\n}\n.link[data-v-9fcfedee] {\n  font-size: 1.8rem;\n  line-height: 2;\n  transition: opacity .15s ease-in-out;\n}\n.link-container[data-v-9fcfedee] {\n  justify-content: flex-end;\n}\n.link[data-v-9fcfedee]:active {\n  opacity: .5;\n}\n.content[data-v-9fcfedee] {\n  justify-content: center;\n  opacity: 1;\n  transition: opacity .15s ease-in-out, visibility .15s ease-in-out .15s;\n}\n.content--hidden[data-v-9fcfedee] {\n  opacity: 0;\n  visibility: hidden;\n}\n.loader[data-v-9fcfedee] {\n  top: 50%;\n  left: 50%;\n  transform: translateX(-50%);\n  opacity: 0;\n  visibility: hidden;\n  transition: opacity .15s ease-in-out;\n}\n.loader--active[data-v-9fcfedee] {\n  visibility: visible;\n  opacity: 1;\n}\n", ""]);
 
 // exports
 
@@ -18959,15 +18992,18 @@ var render = function() {
           ),
           _vm._v(" "),
           _c(
-            "router-link",
-            {
-              staticClass: "link u_center l_flex l_grow",
-              attrs: { to: "/signup" }
-            },
-            [_vm._v("Noch kein Account?")]
+            "div",
+            { staticClass: "link-container l_flex l_grow" },
+            [
+              _c(
+                "router-link",
+                { staticClass: "link u_center", attrs: { to: "/signup" } },
+                [_vm._v("Noch kein Account?")]
+              )
+            ],
+            1
           )
-        ],
-        1
+        ]
       )
     ])
   ])
@@ -19076,7 +19112,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.logo[data-v-c179f5b0] {\n  width: 40%;\n}\n.btn[data-v-c179f5b0] {\n  min-width: 65%;\n  margin-top: auto;\n}\n.inp[data-v-c179f5b0] {\n  margin: 1rem 0;\n}\n.l_wrapper[data-v-c179f5b0] {\n  justify-content: flex-start;\n}\n.link[data-v-c179f5b0] {\n  font-size: 1.8rem;\n  line-height: 2;\n  transition: color .15s ease-in-out;\n  justify-content: flex-end;\n}\n.link[data-v-c179f5b0]:active {\n  opacity: .5;\n}\n.content[data-v-c179f5b0] {\n  justify-content: center;\n  opacity: 1;\n  transition: opacity .15s ease-in-out, visibility .15s ease-in-out .15s;\n}\n.content--hidden[data-v-c179f5b0] {\n  opacity: 0;\n  visibility: hidden;\n}\n.loader[data-v-c179f5b0] {\n  top: 50%;\n  left: 50%;\n  transform: translateX(-50%);\n  opacity: 0;\n  visibility: hidden;\n  transition: opacity .15s ease-in-out;\n}\n.loader--active[data-v-c179f5b0] {\n  visibility: visible;\n  opacity: 1;\n}\n", ""]);
+exports.push([module.i, "\n.logo[data-v-c179f5b0] {\n  width: 40%;\n}\n.btn[data-v-c179f5b0] {\n  min-width: 65%;\n  margin-top: auto;\n}\n.inp[data-v-c179f5b0] {\n  margin: 1rem 0;\n}\n.l_wrapper[data-v-c179f5b0] {\n  justify-content: flex-start;\n}\n.link[data-v-c179f5b0] {\n  font-size: 1.8rem;\n  line-height: 2;\n  transition: opacity .15s ease-in-out;\n}\n.link-container[data-v-c179f5b0] {\n  justify-content: flex-end;\n}\n.link[data-v-c179f5b0]:active {\n  opacity: .5;\n}\n.content[data-v-c179f5b0] {\n  justify-content: center;\n  opacity: 1;\n  transition: opacity .15s ease-in-out, visibility .15s ease-in-out .15s;\n}\n.content--hidden[data-v-c179f5b0] {\n  opacity: 0;\n  visibility: hidden;\n}\n.loader[data-v-c179f5b0] {\n  top: 50%;\n  left: 50%;\n  transform: translateX(-50%);\n  opacity: 0;\n  visibility: hidden;\n  transition: opacity .15s ease-in-out;\n}\n.loader--active[data-v-c179f5b0] {\n  visibility: visible;\n  opacity: 1;\n}\n", ""]);
 
 // exports
 
@@ -19232,15 +19268,18 @@ var render = function() {
           ),
           _vm._v(" "),
           _c(
-            "router-link",
-            {
-              staticClass: "link u_center l_flex l_grow",
-              attrs: { to: "/login" }
-            },
-            [_vm._v("Schon registriert?")]
+            "div",
+            { staticClass: "link-container l_flex l_grow" },
+            [
+              _c(
+                "router-link",
+                { staticClass: "link u_center", attrs: { to: "/login" } },
+                [_vm._v("Schon registriert?")]
+              )
+            ],
+            1
           )
-        ],
-        1
+        ]
       )
     ])
   ])
@@ -20092,49 +20131,101 @@ var render = function() {
     _c("section", { staticClass: "l_section" }, [
       _c("h2", { staticClass: "headline" }, [_vm._v("Accountdaten")]),
       _vm._v(" "),
-      _c("form", { staticClass: "l_flex" }, [
-        _c("p", { staticClass: "label" }, [_vm._v("Name")]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "inp",
-          attrs: { placeholder: "Name", readonly: "" }
-        }),
-        _vm._v(" "),
-        _c("p", { staticClass: "label" }, [_vm._v("Vorname")]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "inp",
-          attrs: { placeholder: "Vorname", readonly: "" }
-        }),
-        _vm._v(" "),
-        _c("p", { staticClass: "label" }, [_vm._v("E-Mail")]),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.$user.data.userName,
-              expression: "$user.data.userName"
-            }
-          ],
-          staticClass: "inp",
-          attrs: { type: "email", placeholder: "E-Mail-Adresse", readonly: "" },
-          domProps: { value: _vm.$user.data.userName },
+      _c(
+        "form",
+        {
+          staticClass: "l_flex",
           on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.$set(_vm.$user.data, "userName", $event.target.value)
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.save($event)
             }
           }
-        }),
-        _vm._v(" "),
-        _c("button", { staticClass: "btn", attrs: { type: "submit" } }, [
-          _vm._v("Speichern")
-        ])
-      ])
+        },
+        [
+          _c("p", { staticClass: "label" }, [_vm._v("Name")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.$user.data.lastName,
+                expression: "$user.data.lastName"
+              }
+            ],
+            staticClass: "inp",
+            attrs: { placeholder: "Name" },
+            domProps: { value: _vm.$user.data.lastName },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.$user.data, "lastName", $event.target.value)
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("p", { staticClass: "description--inputbox" }, [
+            _vm._v("Vorname")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.$user.data.firstName,
+                expression: "$user.data.firstName"
+              }
+            ],
+            staticClass: "inp",
+            attrs: { placeholder: "Vorname" },
+            domProps: { value: _vm.$user.data.firstName },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.$user.data, "firstName", $event.target.value)
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("p", { staticClass: "description--inputbox" }, [_vm._v("E-Mail")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.$user.data.userName,
+                expression: "$user.data.userName"
+              }
+            ],
+            staticClass: "inp",
+            attrs: {
+              type: "email",
+              placeholder: "E-Mail-Adresse",
+              readonly: ""
+            },
+            domProps: { value: _vm.$user.data.userName },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.$user.data, "userName", $event.target.value)
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("button", { staticClass: "btn", attrs: { type: "submit" } }, [
+            _vm._v("Speichern")
+          ])
+        ]
+      )
     ]),
     _vm._v(" "),
     _c("span", { staticClass: "l_divider" })
