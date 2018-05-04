@@ -9000,8 +9000,8 @@ if (inBrowser) {
       self.$user = new Apiomat.FrontendUser();
     });
 
-    EventBus.$on('error', function (error) {
-      self.flashMessages.push(error);
+    EventBus.$on('newMessage', function (message) {
+      self.flashMessages.push(message);
 
       setTimeout(function () {
         let index = self.flashMessages.indexOf(error);
@@ -9145,7 +9145,7 @@ if (inBrowser) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_router_js__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_validate_js__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_cookie_js__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__classes_ErrorTypes__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__classes_MessageTypes__ = __webpack_require__(13);
 //
 //
 //
@@ -9185,7 +9185,6 @@ if (inBrowser) {
   data() {
     return {
       loading: false,
-      error: new Error(),
     }
   },
   beforeMount: function () {
@@ -9197,9 +9196,7 @@ if (inBrowser) {
       EventBus.$emit('clearFlashMessages');
 
       if (!__WEBPACK_IMPORTED_MODULE_1__utils_validate_js__["a" /* default */].email(this.$user.getUserName())) {
-        this.error.message = 'Bitte gib eine gültige E-Mail-Adresse ein.';
-        this.error.type = __WEBPACK_IMPORTED_MODULE_3__classes_ErrorTypes__["b" /* WARNING */];
-        EventBus.$emit('error', this.error);
+        EventBus.$emit('newMessage', {message: 'Bitte gib eine gültige E-Mail-Adresse ein.', type: __WEBPACK_IMPORTED_MODULE_3__classes_MessageTypes__["a" /* WARNING */]});
         this.loading = false;
         return;
       }
@@ -9214,17 +9211,14 @@ if (inBrowser) {
         onError: error => {
           switch (error.statusCode) {
             case 615:
-              this.error.message = 'Oops! Scheint als hättest du keine Internetverbindung.';
-              this.error.type = __WEBPACK_IMPORTED_MODULE_3__classes_ErrorTypes__["b" /* WARNING */];
+              EventBus.$emit('newMessage', {message: 'Oops! Scheint als hättest du keine Internetverbindung.', type: __WEBPACK_IMPORTED_MODULE_3__classes_MessageTypes__["a" /* WARNING */]});
               break;
             case 840:
-              this.error.message = 'Die eingegebene E-Mail-Adresse oder das Kennwort ist inkorrekt.';
-              this.error.type = __WEBPACK_IMPORTED_MODULE_3__classes_ErrorTypes__["b" /* WARNING */];
+              EventBus.$emit('newMessage', {message: 'Die eingegebene E-Mail-Adresse oder das Kennwort ist inkorrekt.', type: __WEBPACK_IMPORTED_MODULE_3__classes_MessageTypes__["a" /* WARNING */]});
               break;
             default:
               console.log(error);
           }
-          EventBus.$emit('error', this.error);
           this.loading = false;
         }
       });
@@ -9254,13 +9248,13 @@ if (inBrowser) {
 
 "use strict";
 const WARNING = 'warning';
-/* harmony export (immutable) */ __webpack_exports__["b"] = WARNING;
+/* harmony export (immutable) */ __webpack_exports__["a"] = WARNING;
 
 const ERROR = 'error';
 /* unused harmony export ERROR */
 
 const SUCCESS = 'success';
-/* harmony export (immutable) */ __webpack_exports__["a"] = SUCCESS;
+/* unused harmony export SUCCESS */
 
 
 /***/ }),
@@ -9270,7 +9264,7 @@ const SUCCESS = 'success';
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_router_js__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_validate_js__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__classes_ErrorTypes__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__classes_MessageTypes__ = __webpack_require__(13);
 //
 //
 //
@@ -9311,7 +9305,6 @@ const SUCCESS = 'success';
   data() {
     return {
       confirmPassword: '',
-      error: new Error(),
       loading: false
     }
   },
@@ -9324,17 +9317,13 @@ const SUCCESS = 'success';
       EventBus.$emit('clearFlashMessages');
 
       if (!__WEBPACK_IMPORTED_MODULE_1__utils_validate_js__["a" /* default */].email(this.$user.getUserName())) {
-        this.error.message = 'Bitte gib eine gültige E-Mail-Adresse ein.';
-        this.error.type = __WEBPACK_IMPORTED_MODULE_2__classes_ErrorTypes__["b" /* WARNING */];
-        EventBus.$emit('error', this.error);
+        EventBus.$emit('newMessage', {message: 'Bitte gib eine gültige E-Mail-Adresse ein.', type: __WEBPACK_IMPORTED_MODULE_2__classes_MessageTypes__["a" /* WARNING */]});
         this.loading = false;
         return;
       }
 
       if (this.confirmPassword !== this.$user.getPassword()) {
-        this.error.message = 'Die eingegebenen Passwörter stimmen nicht überein.';
-        this.error.type = __WEBPACK_IMPORTED_MODULE_2__classes_ErrorTypes__["b" /* WARNING */];
-        EventBus.$emit('error', this.error);
+        EventBus.$emit('newMessage', {message: 'Die eingegebenen Passwörter stimmen nicht überein.', type: __WEBPACK_IMPORTED_MODULE_2__classes_MessageTypes__["a" /* WARNING */]});
         this.loading = false;
         return;
       }
@@ -9346,27 +9335,22 @@ const SUCCESS = 'success';
           __WEBPACK_IMPORTED_MODULE_0__utils_router_js__["a" /* default */].push('/');
 
           setTimeout(function () {
-            let error = new Error();
-            error.message = 'Dein Account wurde erfolgreich registriert';
-            error.type = __WEBPACK_IMPORTED_MODULE_2__classes_ErrorTypes__["a" /* SUCCESS */];
-            EventBus.$emit('error', error);
+            EventBus.$emit('newMessage', {message: 'Dein Account wurde erfolgreich registriert', type: __WEBPACK_IMPORTED_MODULE_2__classes_MessageTypes__["a" /* WARNING */]});
           }, 1000);
         },
         onError: error => {
           switch (error.statusCode) {
             case 0:
             case 615:
-              this.error.message = 'Oops! Scheint als hättest du keine Internetverbindung.';
-              this.error.type = __WEBPACK_IMPORTED_MODULE_2__classes_ErrorTypes__["b" /* WARNING */];
+              EventBus.$emit('newMessage', {message: 'Oops! Scheint als hättest du keine Internetverbindung.', type: __WEBPACK_IMPORTED_MODULE_2__classes_MessageTypes__["a" /* WARNING */]});
               break;
             case 830:
-              this.error.message = 'Es existiert schon ein Account mit dieser E-Mail-Adresse.';
-              this.error.type = __WEBPACK_IMPORTED_MODULE_2__classes_ErrorTypes__["b" /* WARNING */];
+              EventBus.$emit('newMessage', {message: 'Es existiert schon ein Account mit dieser E-Mail-Adresse.', type: __WEBPACK_IMPORTED_MODULE_2__classes_MessageTypes__["a" /* WARNING */]});
               break;
             default:
               console.log(error);
           }
-          EventBus.$emit('error', this.error);
+          EventBus.$emit('newMessage', this.error);
           this.loading = false;
         }
       });
@@ -9870,7 +9854,7 @@ if (false) {(function () {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_selector_type_script_index_0_Account_vue__ = __webpack_require__(25);
 /* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_c22ac84c_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Account_vue__ = __webpack_require__(77);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_c22ac84c_hasScoped_true_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Account_vue__ = __webpack_require__(77);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_component_normalizer__ = __webpack_require__(2);
 var disposed = false
 function injectStyle (context) {
@@ -9887,14 +9871,14 @@ var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = null
+var __vue_scopeId__ = "data-v-c22ac84c"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 
 var Component = Object(__WEBPACK_IMPORTED_MODULE_2__node_modules_vue_loader_lib_runtime_component_normalizer__["a" /* default */])(
   __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_selector_type_script_index_0_Account_vue__["a" /* default */],
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_c22ac84c_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Account_vue__["a" /* render */],
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_c22ac84c_hasScoped_false_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Account_vue__["b" /* staticRenderFns */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_c22ac84c_hasScoped_true_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Account_vue__["a" /* render */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_c22ac84c_hasScoped_true_optionsId_0_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_Account_vue__["b" /* staticRenderFns */],
   __vue_template_functional__,
   __vue_styles__,
   __vue_scopeId__,
@@ -9926,6 +9910,17 @@ if (false) {(function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -20051,13 +20046,13 @@ if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
 var add = __webpack_require__(1).default
-var update = add("f7ba8bfe", content, false, {});
+var update = add("0df509a5", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"optionsId\":\"0\",\"vue\":true,\"scoped\":false,\"sourceMap\":false}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Account.vue", function() {
-     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"optionsId\":\"0\",\"vue\":true,\"scoped\":false,\"sourceMap\":false}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Account.vue");
+   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"optionsId\":\"0\",\"vue\":true,\"id\":\"data-v-c22ac84c\",\"scoped\":true,\"sourceMap\":false}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Account.vue", function() {
+     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"optionsId\":\"0\",\"vue\":true,\"id\":\"data-v-c22ac84c\",\"scoped\":true,\"sourceMap\":false}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Account.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -20075,7 +20070,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n.btn[data-v-c22ac84c] {\n    width: 65%;\n    margin-top: 4vh;\n    margin-bottom: 4vh;\n    margin-left: auto;\n}\n.inp[data-v-c22ac84c] {\n    margin: 1rem 0 2rem 0;\n}\n.headline[data-v-c22ac84c] {\n    margin-bottom: 2.5rem;\n}\n", ""]);
 
 // exports
 
@@ -20091,18 +20086,61 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "l_wrapper l_wrapper--small" }, [
-      _c("h1", [_vm._v("account")])
+  return _c("div", { staticClass: "l_wrapper l_wrapper--small" }, [
+    _c("div", { staticClass: "l_flex content" }, [
+      _c("h1", { staticClass: "headline headline--h1" }, [
+        _vm._v("Accountdaten")
+      ]),
+      _vm._v(" "),
+      _c("form", { staticClass: "l_flex" }, [
+        _c("p", { staticClass: "description--inputbox" }, [_vm._v("Name")]),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "inp inp--18",
+          attrs: { placeholder: "Name", readonly: "" }
+        }),
+        _vm._v(" "),
+        _c("p", { staticClass: "description--inputbox" }, [_vm._v("Vorname")]),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "inp inp--18",
+          attrs: { placeholder: "Vorname", readonly: "" }
+        }),
+        _vm._v(" "),
+        _c("p", { staticClass: "description--inputbox" }, [_vm._v("E-Mail")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.$user.data.userName,
+              expression: "$user.data.userName"
+            }
+          ],
+          staticClass: "inp inp--18",
+          attrs: { type: "email", placeholder: "E-Mail-Adresse", readonly: "" },
+          domProps: { value: _vm.$user.data.userName },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.$user.data, "userName", $event.target.value)
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c(
+          "button",
+          { staticClass: "btn btn--18", attrs: { type: "submit" } },
+          [_vm._v("Speichern")]
+        )
+      ])
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 if (false) {
