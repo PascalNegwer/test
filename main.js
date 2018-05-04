@@ -20070,7 +20070,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.btn[data-v-c22ac84c] {\n    width: 65%;\n    margin-top: 2.4rem;\n    margin-left: auto;\n}\n.inp[data-v-c22ac84c] {\n    margin: 1rem 0 2rem 0;\n}\n.label[data-v-c22ac84c] {\n  font-weight: 300;\n  color: var(--lightgrey);\n  font-size: 1.4rem;\n}\n", ""]);
+exports.push([module.i, "\n.btn[data-v-c22ac84c] {\n    margin-top: 2.4rem;\n    margin-left: auto;\n}\n.inp[data-v-c22ac84c] {\n    margin: 1rem 0 2rem 0;\n}\n.label[data-v-c22ac84c] {\n  font-weight: 300;\n  color: var(--lightgrey);\n  font-size: 1.4rem;\n}\n", ""]);
 
 // exports
 
@@ -20096,14 +20096,14 @@ var render = function() {
         _c("p", { staticClass: "label" }, [_vm._v("Name")]),
         _vm._v(" "),
         _c("input", {
-          staticClass: "inp inp--18",
+          staticClass: "inp",
           attrs: { placeholder: "Name", readonly: "" }
         }),
         _vm._v(" "),
         _c("p", { staticClass: "label" }, [_vm._v("Vorname")]),
         _vm._v(" "),
         _c("input", {
-          staticClass: "inp inp--18",
+          staticClass: "inp",
           attrs: { placeholder: "Vorname", readonly: "" }
         }),
         _vm._v(" "),
@@ -20118,7 +20118,7 @@ var render = function() {
               expression: "$user.data.userName"
             }
           ],
-          staticClass: "inp inp--18",
+          staticClass: "inp",
           attrs: { type: "email", placeholder: "E-Mail-Adresse", readonly: "" },
           domProps: { value: _vm.$user.data.userName },
           on: {
@@ -20131,11 +20131,9 @@ var render = function() {
           }
         }),
         _vm._v(" "),
-        _c(
-          "button",
-          { staticClass: "btn btn--18", attrs: { type: "submit" } },
-          [_vm._v("Speichern")]
-        )
+        _c("button", { staticClass: "btn", attrs: { type: "submit" } }, [
+          _vm._v("Speichern")
+        ])
       ])
     ]),
     _vm._v(" "),
