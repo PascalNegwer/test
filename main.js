@@ -20167,9 +20167,7 @@ var render = function() {
             }
           }),
           _vm._v(" "),
-          _c("p", { staticClass: "description--inputbox" }, [
-            _vm._v("Vorname")
-          ]),
+          _c("p", { staticClass: "label" }, [_vm._v("Vorname")]),
           _vm._v(" "),
           _c("input", {
             directives: [
@@ -20193,7 +20191,7 @@ var render = function() {
             }
           }),
           _vm._v(" "),
-          _c("p", { staticClass: "description--inputbox" }, [_vm._v("E-Mail")]),
+          _c("p", { staticClass: "label" }, [_vm._v("E-Mail")]),
           _vm._v(" "),
           _c("input", {
             directives: [
