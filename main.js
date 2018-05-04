@@ -9927,6 +9927,8 @@ if (false) {(function () {
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   beforeCreate: function() {
@@ -10091,8 +10093,6 @@ if (false) {(function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-//
-//
 //
 //
 //
@@ -20070,7 +20070,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.btn[data-v-c22ac84c] {\n    width: 65%;\n    margin-top: 4vh;\n    margin-bottom: 4vh;\n    margin-left: auto;\n}\n.inp[data-v-c22ac84c] {\n    margin: 1rem 0 2rem 0;\n}\n.headline[data-v-c22ac84c] {\n    margin-bottom: 2.5rem;\n}\n", ""]);
+exports.push([module.i, "\n.btn[data-v-c22ac84c] {\n    width: 65%;\n    margin-top: 2.4rem;\n    margin-left: auto;\n}\n.inp[data-v-c22ac84c] {\n    margin: 1rem 0 2rem 0;\n}\n.label[data-v-c22ac84c] {\n  font-weight: 300;\n  color: var(--lightgrey);\n  font-size: 1.4rem;\n}\n", ""]);
 
 // exports
 
@@ -20087,27 +20087,27 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "l_wrapper l_wrapper--small" }, [
-    _c("div", { staticClass: "l_flex content" }, [
-      _c("h1", { staticClass: "headline headline--h1" }, [
-        _vm._v("Accountdaten")
-      ]),
+    _c("h1", { staticClass: "headline headline--main" }, [_vm._v("Account")]),
+    _vm._v(" "),
+    _c("section", { staticClass: "l_section" }, [
+      _c("h2", { staticClass: "headline" }, [_vm._v("Accountdaten")]),
       _vm._v(" "),
       _c("form", { staticClass: "l_flex" }, [
-        _c("p", { staticClass: "description--inputbox" }, [_vm._v("Name")]),
+        _c("p", { staticClass: "label" }, [_vm._v("Name")]),
         _vm._v(" "),
         _c("input", {
           staticClass: "inp inp--18",
           attrs: { placeholder: "Name", readonly: "" }
         }),
         _vm._v(" "),
-        _c("p", { staticClass: "description--inputbox" }, [_vm._v("Vorname")]),
+        _c("p", { staticClass: "label" }, [_vm._v("Vorname")]),
         _vm._v(" "),
         _c("input", {
           staticClass: "inp inp--18",
           attrs: { placeholder: "Vorname", readonly: "" }
         }),
         _vm._v(" "),
-        _c("p", { staticClass: "description--inputbox" }, [_vm._v("E-Mail")]),
+        _c("p", { staticClass: "label" }, [_vm._v("E-Mail")]),
         _vm._v(" "),
         _c("input", {
           directives: [
@@ -20137,7 +20137,9 @@ var render = function() {
           [_vm._v("Speichern")]
         )
       ])
-    ])
+    ]),
+    _vm._v(" "),
+    _c("span", { staticClass: "l_divider" })
   ])
 }
 var staticRenderFns = []
@@ -20257,7 +20259,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -20281,49 +20283,45 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "l_wrapper l_wrapper--small" }, [
-      _c("div", { staticClass: "impressum" }, [
-        _c("h1", { staticClass: "headline headline--h1" }, [
-          _vm._v("Impressum")
+      _c("h1", { staticClass: "headline headline--main" }, [
+        _vm._v("Impressum")
+      ]),
+      _vm._v(" "),
+      _c("section", { staticClass: "l_section" }, [
+        _c("p", { staticClass: "paragraph" }, [
+          _vm._v("\n      Angaben gemäß § 5 TMG\n    ")
         ]),
         _vm._v(" "),
-        _c("br"),
+        _c("p", { staticClass: "paragraph" }, [
+          _vm._v(
+            "Hinweis: Diese App ist ein Studienprojekt und nicht für den öffentlichen Gebrauch bestimmt!"
+          )
+        ]),
         _vm._v(" "),
         _c("p", { staticClass: "paragraph" }, [
-          _vm._v("\n            Angaben gemäß § 5 TMG\n        "),
+          _vm._v("\n      DHBW Mosbach"),
           _c("br"),
+          _vm._v("\n      Oberer Mühlenweg 2-6"),
           _c("br"),
-          _vm._v(
-            "\n            Hinweis: Diese App ist ein Studienprojekt und nicht für den öffentlichen Gebrauch bestimmt! "
-          ),
-          _c("br"),
-          _c("br"),
-          _vm._v("\n        DHBW Mosbach "),
-          _c("br"),
-          _vm._v("\n            Oberer Mühlenweg 2-6"),
-          _c("br"),
-          _vm._v("\n            74821 Mosbach"),
-          _c("br"),
-          _vm._v(" "),
+          _vm._v("\n      74821 Mosbach"),
           _c("br")
         ]),
         _vm._v(" "),
         _c("h4", { staticClass: "paragraph paragraph--strong" }, [
-          _vm._v("Verantwortlich für den Inhalt: ")
+          _vm._v("Verantwortlich für den Inhalt:")
         ]),
         _vm._v(" "),
         _c("p", { staticClass: "paragraph" }, [
-          _vm._v("\n        Miriam Andriof"),
+          _vm._v("\n      Miriam Andriof"),
           _c("br"),
-          _vm._v("\n        Linda Jansen"),
+          _vm._v("\n      Linda Jansen"),
           _c("br"),
-          _vm._v("\n        Philipp Kuhn"),
+          _vm._v("\n      Philipp Kuhn"),
           _c("br"),
-          _vm._v("\n        Pascal Negwer"),
+          _vm._v("\n      Pascal Negwer"),
           _c("br"),
-          _vm._v("\n        Lea-Sophie Rother")
+          _vm._v("\n      Lea-Sophie Rother\n    ")
         ]),
-        _vm._v(" "),
-        _c("br"),
         _vm._v(" "),
         _c("h4", { staticClass: "paragraph paragraph--strong" }, [
           _vm._v("Kontakt:")
@@ -20334,45 +20332,34 @@ var staticRenderFns = [
           _c("a", { attrs: { href: "mailto:wt5health@gmail.com" } }, [
             _vm._v("wt5health@gmail.com")
           ])
-        ]),
-        _vm._v(" "),
-        _c("br"),
-        _vm._v(" "),
-        _c("br"),
-        _vm._v(" "),
-        _c("h3", { staticClass: "headline headline--h3" }, [
-          _vm._v("Haftung für Inhalte")
-        ]),
-        _vm._v(" "),
-        _c("br"),
+        ])
+      ]),
+      _vm._v(" "),
+      _c("section", { staticClass: "l_section" }, [
+        _c("h3", { staticClass: "headline" }, [_vm._v("Haftung für Inhalte")]),
         _vm._v(" "),
         _c("p", { staticClass: "paragraph" }, [
           _vm._v(
             "Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen. Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend entfernen."
           )
-        ]),
-        _vm._v(" "),
-        _c("br"),
-        _vm._v(" "),
-        _c("h3", { staticClass: "headline headline--h3" }, [
-          _vm._v("Datenschutz")
-        ]),
-        _vm._v(" "),
-        _c("br"),
+        ])
+      ]),
+      _vm._v(" "),
+      _c("section", { staticClass: "l_section" }, [
+        _c("h3", { staticClass: "headline" }, [_vm._v("Datenschutz")]),
         _vm._v(" "),
         _c("p", { staticClass: "paragraph" }, [
           _vm._v(
-            "Wir erheben für die Nutzung unserer App nur unbedingt nötige personenbezogene Daten (E-Mail), die nicht an Dritte weitergegeben und mit größter Sorgfalt verwaltet werden. Soweit auf unseren Seiten weitere personenbezogene Daten (beispielsweise Name oder Anschrift) erhoben werden, erfolgt dies, soweit möglich, stets auf freiwilliger Basis. Diese Daten werden ohne Ihre ausdrückliche Zustimmung nicht an Dritte weitergegeben. "
+            "Wir erheben für die Nutzung unserer App nur unbedingt nötige personenbezogene Daten (E-Mail), die nicht an Dritte weitergegeben und mit größter Sorgfalt verwaltet werden. Soweit auf unseren Seiten weitere personenbezogene Daten (beispielsweise Name oder Anschrift) erhoben werden, erfolgt dies, soweit möglich, stets auf freiwilliger Basis. Diese Daten werden ohne Ihre ausdrückliche Zustimmung nicht an Dritte weitergegeben."
           ),
           _c("br"),
           _vm._v(
-            "\n            Wir weisen darauf hin, dass die Datenübertragung im Internet Sicherheitslücken aufweisen kann. Ein lückenloser Schutz der Daten vor dem Zugriff durch Dritte ist nicht möglich. "
+            "\n    Wir weisen darauf hin, dass die Datenübertragung im Internet Sicherheitslücken aufweisen kann. Ein lückenloser Schutz der Daten vor dem Zugriff durch Dritte ist nicht möglich. "
           ),
           _c("br"),
           _vm._v(
-            "\n            Der Nutzung von im Rahmen der Impressumspflicht veröffentlichten Kontaktdaten durch Dritte zur Übersendung von nicht ausdrücklich angeforderter Werbung und Informationsmaterialien wird hiermit ausdrücklich widersprochen. Die Betreiber der Seiten behalten sich ausdrücklich rechtliche Schritte im Falle der unverlangten Zusendung von Werbeinformationen vor."
-          ),
-          _c("br")
+            "\n    Der Nutzung von im Rahmen der Impressumspflicht veröffentlichten Kontaktdaten durch Dritte zur Übersendung von nicht ausdrücklich angeforderter Werbung und Informationsmaterialien wird hiermit ausdrücklich widersprochen. Die Betreiber der Seiten behalten sich ausdrücklich rechtliche Schritte im Falle der unverlangten Zusendung von Werbeinformationen vor.\n    "
+          )
         ])
       ])
     ])
