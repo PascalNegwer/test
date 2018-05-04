@@ -8966,6 +8966,8 @@ if (inBrowser) {
 //
 //
 //
+//
+//
 
 
 
@@ -20337,44 +20339,50 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "main",
-    { staticClass: "l_main", class: { "l_main--w-nav": _vm.isMain() } },
+    "body",
     [
       _c(
-        "div",
-        { staticClass: "flash-messages-container" },
+        "main",
+        { staticClass: "l_main", class: { "l_main--w-nav": _vm.isMain() } },
         [
           _c(
-            "transition",
-            { attrs: { name: "slide-fade" } },
-            _vm._l(_vm.flashMessages, function(flashMessage, index) {
-              return _c(
-                "div",
-                {
-                  staticClass: "flash-message",
-                  class: [
-                    "flash-message--" + flashMessage.type,
-                    "u_icon--" + flashMessage.type
-                  ],
-                  on: {
-                    click: function($event) {
-                      _vm.unset(index)
-                    }
-                  }
-                },
-                [
-                  _c("p", { staticClass: "flash-message__text" }, [
-                    _vm._v(_vm._s(flashMessage.message))
-                  ])
-                ]
+            "div",
+            { staticClass: "flash-messages-container" },
+            [
+              _c(
+                "transition",
+                { attrs: { name: "slide-fade" } },
+                _vm._l(_vm.flashMessages, function(flashMessage, index) {
+                  return _c(
+                    "div",
+                    {
+                      staticClass: "flash-message",
+                      class: [
+                        "flash-message--" + flashMessage.type,
+                        "u_icon--" + flashMessage.type
+                      ],
+                      on: {
+                        click: function($event) {
+                          _vm.unset(index)
+                        }
+                      }
+                    },
+                    [
+                      _c("p", { staticClass: "flash-message__text" }, [
+                        _vm._v(_vm._s(flashMessage.message))
+                      ])
+                    ]
+                  )
+                })
               )
-            })
-          )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("router-view")
         ],
         1
       ),
-      _vm._v(" "),
-      _c("router-view"),
       _vm._v(" "),
       _vm.isMain() ? _c("main-nav") : _vm._e()
     ],
