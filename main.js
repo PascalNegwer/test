@@ -9649,6 +9649,13 @@ if (false) {(function () {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
@@ -9657,6 +9664,7 @@ if (false) {(function () {
   data() {
     return {
       running: false,
+      paused: false,
     }
   },
   methods: {
@@ -9665,6 +9673,12 @@ if (false) {(function () {
     },
     stop() {
       this.running = false;
+    },
+    pause() {
+      this.paused = true;
+    },
+    resume() {
+      this.paused = false;
     },
     saveData() {
 
@@ -19693,20 +19707,55 @@ var render = function() {
               "section",
               { key: "double", staticClass: "timer__button-container" },
               [
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "timer__button-wrapper timer__button-wrapper--small"
-                  },
-                  [
-                    _c(
-                      "div",
-                      { staticClass: "timer__button btn btn--18 btn--round" },
-                      [_c("p", [_vm._v("Pause")])]
-                    )
-                  ]
-                ),
+                _c("transition", { attrs: { name: "turn", mode: "out-in" } }, [
+                  _vm.paused
+                    ? _c(
+                        "div",
+                        {
+                          key: "resume",
+                          staticClass:
+                            "timer__button-wrapper timer__button-wrapper--small"
+                        },
+                        [
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "timer__button btn btn--18 btn--round",
+                              on: {
+                                click: function($event) {
+                                  _vm.resume()
+                                }
+                              }
+                            },
+                            [_c("p", [_vm._v("Weiter")])]
+                          )
+                        ]
+                      )
+                    : _c(
+                        "div",
+                        {
+                          key: "pause",
+                          staticClass:
+                            "timer__button-wrapper timer__button-wrapper--small"
+                        },
+                        [
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "timer__button btn btn--18 btn--round",
+                              on: {
+                                click: function($event) {
+                                  _vm.pause()
+                                }
+                              }
+                            },
+                            [_c("p", [_vm._v("Pause")])]
+                          )
+                        ]
+                      )
+                ]),
                 _vm._v(" "),
                 _c(
                   "div",
@@ -19729,7 +19778,8 @@ var render = function() {
                     )
                   ]
                 )
-              ]
+              ],
+              1
             )
           : _c(
               "section",
