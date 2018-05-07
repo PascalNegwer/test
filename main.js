@@ -9009,7 +9009,6 @@ if (inBrowser) {
       __WEBPACK_IMPORTED_MODULE_1__utils_cookie_js__["a" /* default */].expireNow('sessionToken');
       localStorage.clear();
       __WEBPACK_IMPORTED_MODULE_2__utils_router_js__["a" /* default */].push('/login');
-      self.$user = new Apiomat.FrontendUser();
     });
 
     EventBus.$on('newMessage', function (message) {
@@ -9202,6 +9201,7 @@ if (inBrowser) {
   },
   beforeMount: function () {
     this.loading = false;
+    this.$user = new Apiomat.FrontendUser();
   },
   methods: {
     login() {
@@ -9310,6 +9310,7 @@ if (inBrowser) {
   },
   beforeMount: function () {
     this.loading = false;
+    this.$user = new Apiomat.FrontendUser();
   },
   methods: {
     save() {
@@ -9348,6 +9349,7 @@ if (inBrowser) {
               EventBus.$emit('newMessage', {message: 'Es existiert schon ein Account mit dieser E-Mail-Adresse.', type: __WEBPACK_IMPORTED_MODULE_2__classes_MessageTypes__["c" /* WARNING */]});
               break;
             default:
+              EventBus.$emit('newMessage', {message: 'Oops! Etwas ist schief gegangen', type: __WEBPACK_IMPORTED_MODULE_2__classes_MessageTypes__["a" /* ERROR */]});
               console.log(error);
           }
           EventBus.$emit('newMessage', this.error);
