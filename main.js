@@ -9644,7 +9644,6 @@ if (false) {(function () {
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
@@ -15657,7 +15656,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.flash-messages-container[data-v-04c2046b] {\n  top: 4rem;\n  left: 50%;\n  transform: translateX(-50%);\n  z-index: 100;\n  width: 100%;\n  padding: 0 3rem;\n  position: fixed;\n  display: flex;\n  flex-direction: column;\n}\n.flash-message[data-v-04c2046b] {\n  align-items: center;\n  display: flex;\n  font-family: 'Comfortaa', sans-serif;\n  background: var(--white);\n  font-weight: 300;\n  font-size: 1.6rem;\n  line-height: 1.5;\n  margin-bottom: 1rem;\n  border: var(--white) 1px solid;\n  padding: 2rem 1.5rem;\n}\n.flash-message__text[data-v-04c2046b] {\n  padding-left: 1.5rem;\n  flex-shrink: 1;\n}\n.flash-message[data-v-04c2046b]:before {\n  font-size: 4rem;\n}\n.flash-message--warning[data-v-04c2046b] {\n  border-color: var(--warning);\n  color: var(--warning);\n}\n.flash-message--success[data-v-04c2046b] {\n  border-color: var(--success);\n  color: var(--success);\n}\n.flash-message--error[data-v-04c2046b] {\n  border-color: var(--error);\n  color: var(--error);\n}\n.slide-fade-enter-active[data-v-04c2046b] {\n  transition: all .5s ease;\n}\n.slide-fade-leave-active[data-v-04c2046b] {\n  transition: all .6s cubic-bezier(1.0, 0.5, 0.8, 1.0);\n}\n.slide-fade-enter[data-v-04c2046b], .slide-fade-leave-to[data-v-04c2046b] {\n  transform: translateY(-40px);\n  opacity: 0;\n}\n", ""]);
+exports.push([module.i, "\n.flash-messages-container[data-v-04c2046b] {\n  top: 4rem;\n  left: 50%;\n  transform: translateX(-50%);\n  z-index: 100;\n  width: 100%;\n  padding: 0 3rem;\n  position: fixed;\n  display: flex;\n  flex-direction: column;\n}\n.flash-message[data-v-04c2046b] {\n  align-items: center;\n  display: flex;\n  font-family: 'Comfortaa', sans-serif;\n  background: var(--white);\n  font-weight: 300;\n  font-size: 1.6rem;\n  line-height: 1.5;\n  margin-bottom: 1rem;\n  border: var(--white) 1px solid;\n  padding: 2rem 1.5rem;\n}\n.flash-message__text[data-v-04c2046b] {\n  padding-left: 1.5rem;\n  flex-shrink: 1;\n}\n.flash-message[data-v-04c2046b]:before {\n  font-size: 4rem;\n}\n.flash-message--warning[data-v-04c2046b] {\n  border-color: var(--warning);\n  color: var(--warning);\n}\n.flash-message--success[data-v-04c2046b] {\n  border-color: var(--success);\n  color: var(--success);\n}\n.flash-message--error[data-v-04c2046b] {\n  border-color: var(--error);\n  color: var(--error);\n}\n", ""]);
 
 // exports
 
@@ -15791,7 +15790,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.nav {\n  width: 100%;\n  color: var(--grey);\n  position: fixed;\n  bottom: 0;\n  left: 0;\n  justify-content: space-between;\n  flex-wrap: nowrap;\n  z-index: 1000;\n}\n.nav--dropdown {\n  position: absolute;\n  bottom: 100%;\n  justify-content: center;\n  visibility: hidden;\n  opacity: 0;\n  transition: opacity .15s ease-in-out, visibility .15s .15s;\n  clip: rect(0, auto, auto, 0);\n}\n.nav--visible {\n  visibility: visible;\n  opacity: 1;\n  transition: opacity .15s ease-in-out, visibility;\n}\n.nav__item {\n  width: 25%;\n  display: block;\n  text-align: center;\n  transition: background .15s ease-in-out;\n  position: relative;\n}\n.nav__item:active, .nav__item--active {\n  background: var(--white-50);\n}\n.nav__item--dropdown {\n  display: block;\n  width: 100%;\n  background: var(--white-50);\n  margin-bottom: .2rem;\n  position: relative;\n}\n.nav__item--dropdown:active {\n  background: var(--white);\n}\n.nav__link {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n}\n.nav__icon {\n  padding: 2rem 0 1rem 0;\n  font-size: 3.2rem;\n  color: #5f5f5f;\n}\n.nav__icon:before {\n  transition: color .15s ease-in-out;\n}\n.nav__text {\n  font-size: 1.2rem;\n  font-weight: 400;\n  text-transform: uppercase;\n  text-align: center;\n  padding-bottom: 2rem;\n  transition: color .15s ease-in-out;\n}\n.u_gradient-background--default .nav__icon, .u_gradient-background--mixed .nav__icon {\n  color: var(--lightgrey);\n}\n.u_gradient-background--default .nav__text, .u_gradient-background--mixed .nav__text {\n  color: var(--lightgrey);\n}\n", ""]);
+exports.push([module.i, "\n.nav {\n  width: 100%;\n  color: var(--grey);\n  position: fixed;\n  bottom: 0;\n  left: 0;\n  justify-content: space-between;\n  flex-wrap: nowrap;\n  z-index: 1000;\n}\n.nav--dropdown {\n  position: absolute;\n  bottom: 100%;\n  justify-content: center;\n  visibility: hidden;\n  opacity: 0;\n  transition: opacity .15s ease-in-out, visibility .15s .15s;\n  clip: rect(0, auto, auto, 0);\n}\n.nav--visible {\n  visibility: visible;\n  opacity: 1;\n  transition: opacity .15s ease-in-out, visibility;\n}\n.nav__item {\n  width: 25%;\n  display: block;\n  text-align: center;\n  transition: background .15s ease-in-out;\n  position: relative;\n}\n.nav__item:active, .nav__item--active {\n  background: var(--white-50);\n}\n.nav__item--dropdown {\n  display: block;\n  width: 100%;\n  background: var(--white-50);\n  margin-bottom: .2rem;\n  position: relative;\n}\n.nav__item--dropdown:active {\n  background: var(--white);\n}\n.nav__link {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n}\n.nav__icon {\n  padding: 2rem 0 1rem 0;\n  font-size: 3.2rem;\n  color: #5f5f5f;\n}\n.nav__icon:before {\n  transition: color .3s ease-in-out;\n}\n.nav__text {\n  font-size: 1.2rem;\n  font-weight: 400;\n  text-transform: uppercase;\n  text-align: center;\n  padding-bottom: 2rem;\n  transition: color .3s ease-in-out;\n}\n.u_gradient-background--default .nav__icon, .u_gradient-background--mixed .nav__icon {\n  color: var(--lightgrey);\n}\n.u_gradient-background--default .nav__text, .u_gradient-background--mixed .nav__text {\n  color: var(--lightgrey);\n}\n", ""]);
 
 // exports
 
@@ -18880,7 +18879,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("transition", { attrs: { name: "no-mode-translate" } }, [
+  return _c("transition", { attrs: { name: "t_no-mode-translate" } }, [
     _c("div", { staticClass: "l_flex l_wrapper" }, [
       _c(
         "div",
@@ -19130,7 +19129,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("transition", { attrs: { name: "no-mode-translate" } }, [
+  return _c("transition", { attrs: { name: "t_no-mode-translate" } }, [
     _c("div", { staticClass: "l_flex l_wrapper" }, [
       _c(
         "div",
@@ -19715,7 +19714,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.timer[data-v-01e32e32] {\n  position: relative;\n  flex-grow: 1;\n}\n.timer__button-container[data-v-01e32e32] {\n  display: flex;\n  justify-content: center;\n  margin-top: auto;\n}\n.timer__button-wrapper[data-v-01e32e32] {\n  width: 50%;\n  margin-left: auto;\n  margin-right: auto;\n}\n.timer__button-wrapper--small[data-v-01e32e32] {\n  width: 40%;\n  display: block;\n  margin-top: 5%;\n  margin-bottom: 5%;\n}\n.timer__button[data-v-01e32e32] {\n  background: var(--white-25);\n}\n.timer__button[data-v-01e32e32]:active {\n  background: var(--primary-color);\n}\n.timer__count-container[data-v-01e32e32] {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n.timer__count-wrapper[data-v-01e32e32] {\n  text-align: center;\n}\n.timer__label[data-v-01e32e32] {\n  font-size: 1.8rem;\n  font-weight: 300;\n  color: var(--white-50);\n  margin-bottom: .8rem;\n}\n.timer__count[data-v-01e32e32] {\n  font-family: 'Comfortaa', sans-serif;\n  font-weight: 300;\n  font-size: 5.2rem;\n  display: flex;\n  flex-direction: row;\n  justify-content: center;\n  margin-bottom: 3.2rem;\n}\n.timer__count--small[data-v-01e32e32] {\n  font-size: 3.6rem;\n}\n", ""]);
+exports.push([module.i, "\n.timer[data-v-01e32e32] {\n  position: relative;\n  flex-grow: 1;\n}\n.timer__button-container[data-v-01e32e32] {\n  display: flex;\n  justify-content: center;\n  margin-top: auto;\n}\n.timer__button-wrapper[data-v-01e32e32] {\n  width: 50%;\n  margin-left: auto;\n  margin-right: auto;\n}\n.timer__button-wrapper--small[data-v-01e32e32] {\n  width: 40%;\n  display: block;\n  margin-top: 5%;\n  margin-bottom: 5%;\n}\n.timer__button[data-v-01e32e32] {\n  background: var(--white-25);\n}\n.timer__button[data-v-01e32e32]:active {\n  background: var(--primary-color);\n}\n.timer__count-container[data-v-01e32e32] {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n.timer__count-wrapper[data-v-01e32e32] {\n  text-align: center;\n}\n.timer__label[data-v-01e32e32] {\n  font-size: 1.8rem;\n  font-weight: 300;\n  color: var(--white-50);\n  margin-bottom: .8rem;\n}\n.timer__label span[data-v-01e32e32] {\n  display: inline-block;\n}\n.timer__count[data-v-01e32e32] {\n  font-family: 'Comfortaa', sans-serif;\n  font-weight: 300;\n  font-size: 5.2rem;\n  display: flex;\n  flex-direction: row;\n  justify-content: center;\n  margin-bottom: 3.2rem;\n}\n.timer__count--small[data-v-01e32e32] {\n  font-size: 3.6rem;\n}\n", ""]);
 
 // exports
 
@@ -19739,13 +19738,19 @@ var render = function() {
         _vm._m(0),
         _vm._v(" "),
         _c("div", { staticClass: "timer__count-wrapper" }, [
-          _vm.paused
-            ? _c("h2", { staticClass: "timer__label" }, [
-                _vm._v("Aktuelle Pausenzeit")
+          _c(
+            "h2",
+            { staticClass: "timer__label" },
+            [
+              _vm._v("Aktuelle "),
+              _c("transition", { attrs: { name: "t_turn", mode: "out-in" } }, [
+                _vm.paused
+                  ? _c("span", { key: "pause" }, [_vm._v("Pausenzeit")])
+                  : _c("span", { key: "work" }, [_vm._v("Arbeitszeit")])
               ])
-            : _c("h2", { staticClass: "timer__label" }, [
-                _vm._v("Aktuelle Arbeitszeit")
-              ]),
+            ],
+            1
+          ),
           _vm._v(" "),
           _vm._m(1)
         ]),
@@ -19753,61 +19758,65 @@ var render = function() {
         _vm._m(2)
       ]),
       _vm._v(" "),
-      _c("transition", { attrs: { name: "turn", mode: "out-in" } }, [
+      _c("transition", { attrs: { name: "t_turn", mode: "out-in" } }, [
         _vm.running
           ? _c(
               "section",
               { key: "double", staticClass: "timer__button-container" },
               [
-                _c("transition", { attrs: { name: "turn", mode: "out-in" } }, [
-                  _vm.paused
-                    ? _c(
-                        "div",
-                        {
-                          key: "resume",
-                          staticClass:
-                            "timer__button-wrapper timer__button-wrapper--small"
-                        },
-                        [
-                          _c(
-                            "div",
-                            {
-                              staticClass:
-                                "timer__button btn btn--18 btn--round",
-                              on: {
-                                click: function($event) {
-                                  _vm.resume()
+                _c(
+                  "transition",
+                  { attrs: { name: "t_turn", mode: "out-in" } },
+                  [
+                    _vm.paused
+                      ? _c(
+                          "div",
+                          {
+                            key: "resume",
+                            staticClass:
+                              "timer__button-wrapper timer__button-wrapper--small"
+                          },
+                          [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "timer__button btn btn--18 btn--round",
+                                on: {
+                                  click: function($event) {
+                                    _vm.resume()
+                                  }
                                 }
-                              }
-                            },
-                            [_c("p", [_vm._v("Weiter")])]
-                          )
-                        ]
-                      )
-                    : _c(
-                        "div",
-                        {
-                          key: "pause",
-                          staticClass:
-                            "timer__button-wrapper timer__button-wrapper--small"
-                        },
-                        [
-                          _c(
-                            "div",
-                            {
-                              staticClass:
-                                "timer__button btn btn--18 btn--round",
-                              on: {
-                                click: function($event) {
-                                  _vm.pause()
+                              },
+                              [_c("p", [_vm._v("Weiter")])]
+                            )
+                          ]
+                        )
+                      : _c(
+                          "div",
+                          {
+                            key: "pause",
+                            staticClass:
+                              "timer__button-wrapper timer__button-wrapper--small"
+                          },
+                          [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "timer__button btn btn--18 btn--round",
+                                on: {
+                                  click: function($event) {
+                                    _vm.pause()
+                                  }
                                 }
-                              }
-                            },
-                            [_c("p", [_vm._v("Pause")])]
-                          )
-                        ]
-                      )
-                ]),
+                              },
+                              [_c("p", [_vm._v("Pause")])]
+                            )
+                          ]
+                        )
+                  ]
+                ),
                 _vm._v(" "),
                 _c(
                   "div",
@@ -20490,7 +20499,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "transition",
-    { attrs: { name: "no-mode-translate" } },
+    { attrs: { name: "t_no-mode-translate" } },
     [_c("router-view")],
     1
   )
@@ -20529,7 +20538,7 @@ var render = function() {
             [
               _c(
                 "transition",
-                { attrs: { name: "slide-fade" } },
+                { attrs: { name: "t_slide-fade" } },
                 _vm._l(_vm.flashMessages, function(flashMessage, index) {
                   return _c(
                     "div",
