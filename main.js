@@ -683,7 +683,7 @@ process.umask = function() { return 0; };
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_router__ = __webpack_require__(46);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__cookie_js__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__cookie_js__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Login_vue__ = __webpack_require__(47);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Signup_vue__ = __webpack_require__(51);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_MainWrapper_vue__ = __webpack_require__(55);
@@ -794,9 +794,6 @@ function loggedInOnly(to, from, next) {
   EventBus.$emit('clearFlashMessages');
   let sessionToken = __WEBPACK_IMPORTED_MODULE_2__cookie_js__["a" /* default */].get('sessionToken');
 
-  Apiomat.Datastore.setCachingStrategy(Apiomat.AOMCacheStrategy.NETWORK_ELSE_CACHE);
-  Apiomat.Datastore.getInstance().setOfflineUsageForClass(Apiomat.FrontendUser, true);
-
   if (!sessionToken) {
     try {
       __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].prototype.$user.initDatastoreIfNeeded();
@@ -836,6 +833,21 @@ function loggedInOnly(to, from, next) {
 
 /***/ }),
 /* 5 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+const WARNING = 'warning';
+/* harmony export (immutable) */ __webpack_exports__["c"] = WARNING;
+
+const ERROR = 'error';
+/* harmony export (immutable) */ __webpack_exports__["a"] = ERROR;
+
+const SUCCESS = 'success';
+/* harmony export (immutable) */ __webpack_exports__["b"] = SUCCESS;
+
+
+/***/ }),
+/* 6 */
 /***/ (function(module, exports) {
 
 var g;
@@ -862,7 +874,7 @@ module.exports = g;
 
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -901,21 +913,6 @@ module.exports = g;
     expireNow: expireNow
   }
 })());
-
-/***/ }),
-/* 7 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-const WARNING = 'warning';
-/* harmony export (immutable) */ __webpack_exports__["c"] = WARNING;
-
-const ERROR = 'error';
-/* harmony export (immutable) */ __webpack_exports__["a"] = ERROR;
-
-const SUCCESS = 'success';
-/* harmony export (immutable) */ __webpack_exports__["b"] = SUCCESS;
-
 
 /***/ }),
 /* 8 */
@@ -8955,7 +8952,7 @@ if (inBrowser) {
 
 /* harmony default export */ __webpack_exports__["a"] = (Vue);
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(3), __webpack_require__(5), __webpack_require__(31).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(3), __webpack_require__(6), __webpack_require__(31).setImmediate))
 
 /***/ }),
 /* 9 */
@@ -8963,7 +8960,7 @@ if (inBrowser) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_main_MainNav_vue__ = __webpack_require__(38);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_cookie_js__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_cookie_js__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_router_js__ = __webpack_require__(4);
 //
 //
@@ -9158,8 +9155,8 @@ if (inBrowser) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_router_js__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_validate_js__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_cookie_js__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__classes_MessageTypes__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_cookie_js__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__classes_MessageTypes__ = __webpack_require__(5);
 //
 //
 //
@@ -9265,7 +9262,7 @@ if (inBrowser) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_router_js__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_validate_js__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__classes_MessageTypes__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__classes_MessageTypes__ = __webpack_require__(5);
 //
 //
 //
@@ -9574,6 +9571,11 @@ if (false) {(function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__classes_MessageTypes__ = __webpack_require__(5);
+//
+//
+//
+//
 //
 //
 //
@@ -9644,40 +9646,245 @@ if (false) {(function () {
 //
 //
 
+
+
+const PERIOD_TYPE_PAUSE = 'pause';
+const PERIOD_TYPE_WORK = 'work';
+
+let createDay = function (self) {
+  self.day.save({
+    onOk: result => {
+      self.$user.postDays(self.day, {
+        onOk: days => {
+          self.$user.loadDays('createdAt >= date(' + (new Date()).setHours(0, 0, 0, 0) + ')', {}, true);
+        },
+        onError: error => {
+          EventBus.$emit('newMessage', {
+            message: 'Oops! Scheint als hättest du keine Internetverbindung.',
+            type: __WEBPACK_IMPORTED_MODULE_0__classes_MessageTypes__["a" /* ERROR */]
+          });
+          console.log(error);
+        }
+      }, true)
+    },
+    onError: error => {
+      EventBus.$emit('newMessage', {
+        message: 'Oops! Scheint als hättest du keine Internetverbindung.',
+        type: __WEBPACK_IMPORTED_MODULE_0__classes_MessageTypes__["a" /* ERROR */]
+      });
+      console.log(error);
+    }
+  });
+};
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: 'timer',
-  props: [],
   data() {
     return {
       running: false,
       paused: false,
+      day: new Apiomat.Day(),
+      currentPeriod: undefined,
+      overallWorkTime: moment(0),
+      overallPauseTime: moment(0),
+      currentTime: moment(0)
     }
+  },
+  beforeMount: function () {
+    this.$user.loadDays('createdAt >= date(' + (new Date()).setHours(0, 0, 0, 0) + ')', {
+      onOk: days => {
+        if (days.length === 0) {
+          createDay(this);
+        } else {
+          this.day = days[0];
+          this.day.loadPeriods('order by createdAt DESC', {
+            onOk: periods => {
+              if (periods.length !== 0) {
+                this.updateTimers();
+                this.currentPeriod = periods[0];
+              }
+            },
+            onError: error => {
+              console.log(error);
+            }
+          }, true);
+        }
+      },
+      onError: error => {
+        createDay(this);
+      }
+    }, true);
+    this.timerLoop();
   },
   methods: {
     start() {
+      if (!navigator.onLine) {
+        EventBus.$emit('newMessage', {
+          message: 'Oops! Scheint als hättest du keine Internetverbindung.',
+          type: __WEBPACK_IMPORTED_MODULE_0__classes_MessageTypes__["a" /* ERROR */]
+        });
+        return;
+      }
+      this.currentPeriod = new Apiomat.Period();
+      this.currentPeriod.setStart(new Date());
+      this.currentPeriod.setPeriodType(PERIOD_TYPE_WORK);
+      this.currentPeriod.save({
+            onOk: result => {
+              this.day.postPeriods(this.currentPeriod, {
+                onOk: result => {
+                  this.running = true;
+                },
+                onError: error => {
+                  console.log(error);
+                }
+              })
+            },
+            onError: error => {
+              console.log(error);
+            }
+          }
+      );
       this.running = true;
     },
     stop() {
+      if (!navigator.onLine) {
+        EventBus.$emit('newMessage', {
+          message: 'Oops! Scheint als hättest du keine Internetverbindung.',
+          type: __WEBPACK_IMPORTED_MODULE_0__classes_MessageTypes__["a" /* ERROR */]
+        });
+        return;
+      }
+      this.currentPeriod.setEnd(new Date());
+      this.currentPeriod.save({
+        onOk: result => {
+        },
+        onError: error => {
+          console.log(error);
+        }
+      });
+      this.currentTime = moment(0);
       this.running = false;
-      this.paused = false;
     },
     pause() {
-      this.paused = true;
+      if (!navigator.onLine) {
+        EventBus.$emit('newMessage', {
+          message: 'Oops! Scheint als hättest du keine Internetverbindung.',
+          type: __WEBPACK_IMPORTED_MODULE_0__classes_MessageTypes__["a" /* ERROR */]
+        });
+        return;
+      }
+      this.currentPeriod.setEnd(new Date());
+      this.currentPeriod.save({
+        onOk: result => {
+        },
+        onError: error => {
+          console.log(error);
+        }
+      });
+      this.currentPeriod = new Apiomat.Period();
+      this.currentPeriod.setStart(new Date());
+      this.currentPeriod.setPeriodType(PERIOD_TYPE_PAUSE);
+      this.currentPeriod.save({
+            onOk: result => {
+              this.day.postPeriods(this.currentPeriod, {
+                onOk: result => {
+                  this.running = true;
+                },
+                onError: error => {
+                  console.log(error);
+                }
+              })
+            },
+            onError: error => {
+              console.log(error);
+            }
+          }
+      );
     },
     resume() {
-      this.paused = false;
+      if (!navigator.onLine) {
+        EventBus.$emit('newMessage', {
+          message: 'Oops! Scheint als hättest du keine Internetverbindung.',
+          type: __WEBPACK_IMPORTED_MODULE_0__classes_MessageTypes__["a" /* ERROR */]
+        });
+        return;
+      }
+      this.currentPeriod.setEnd(new Date());
+      this.currentPeriod.save({
+        onOk: result => {
+        },
+        onError: error => {
+          console.log(error);
+        }
+      });
+      this.currentPeriod = new Apiomat.Period();
+      this.currentPeriod.setStart(new Date());
+      this.currentPeriod.setPeriodType(PERIOD_TYPE_WORK);
+      this.currentPeriod.save({
+            onOk: result => {
+              this.day.postPeriods(this.currentPeriod, {
+                onOk: result => {
+                  this.running = true;
+                },
+                onError: error => {
+                  console.log(error);
+                }
+              })
+            },
+            onError: error => {
+              console.log(error);
+            }
+          }
+      );
     },
-    saveData() {
-
+    timerLoop: function () {
+      if (this.running) {
+        this.updateTimers();
+      }
+      setTimeout(function () {
+          this.timerLoop();
+      }.bind(this), 1000);
     },
-    queue() {
+    updateTimers: function () {
+      let overallWorkTimestamp = 0;
+      let overallPauseTimestamp = 0;
+      let currentTimestamp = 0;
 
-    },
-    startCounting(counter) {
+      this.day.loadPeriods('order by createdAt DESC', {
+        onOk: periods => {
+          for (let i = 0; i < periods.length; i++) {
+            let period = periods[i];
+            switch (period.getPeriodType()) {
+              case PERIOD_TYPE_PAUSE:
+                if (period.getEnd()) {
+                  overallPauseTimestamp += period.getEnd() - period.getStart();
+                } else {
+                  this.paused = true;
+                  this.running = true;
+                  currentTimestamp = (new Date()) - period.getStart();
+                  overallPauseTimestamp += (new Date()) - period.getStart();
+                }
+                break;
+              case PERIOD_TYPE_WORK:
+                if (period.getEnd()) {
+                  overallWorkTimestamp += period.getEnd() - period.getStart();
+                } else {
+                  this.paused = false;
+                  this.running = true;
+                  currentTimestamp = (new Date()) - period.getStart();
+                  overallWorkTimestamp += (new Date()) - period.getStart();
+                }
+                break;
+            }
 
+            this.overallWorkTime = moment(overallWorkTimestamp);
+            this.overallPauseTime = moment(overallPauseTimestamp);
+            this.currentTime = moment(currentTimestamp);
+          }
+        }
+      }, true);
     }
-  }
+  },
 });
 
 
@@ -9914,7 +10121,7 @@ if (false) {(function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__classes_MessageTypes__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__classes_MessageTypes__ = __webpack_require__(5);
 //
 //
 //
@@ -10202,6 +10409,11 @@ __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].use(__WEBPACK_IMPORTED_MODU
 window.EventBus = new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */]();
 __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].prototype.$user = new Apiomat.FrontendUser();
 
+Apiomat.Datastore.setCachingStrategy(Apiomat.AOMCacheStrategy.NETWORK_ELSE_CACHE);
+Apiomat.Datastore.getInstance().setOfflineUsageForClass(Apiomat.FrontendUser, true);
+Apiomat.Datastore.getInstance().setOfflineUsageForClass(Apiomat.Day, true);
+Apiomat.Datastore.getInstance().setOfflineUsageForClass(Apiomat.Period, true);
+
 new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */]({
   router: __WEBPACK_IMPORTED_MODULE_3__utils_router_js__["a" /* default */],
   render: h => h(__WEBPACK_IMPORTED_MODULE_2__App_vue__["a" /* default */]),
@@ -10293,7 +10505,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
                          (typeof global !== "undefined" && global.clearImmediate) ||
                          (this && this.clearImmediate);
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
 
 /***/ }),
 /* 32 */
@@ -10486,7 +10698,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(3)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6), __webpack_require__(3)))
 
 /***/ }),
 /* 33 */
@@ -19734,14 +19946,32 @@ var render = function() {
     { staticClass: "timer l_flex" },
     [
       _c("section", { staticClass: "timer__count-container" }, [
-        _vm._m(0),
+        _c("div", { staticClass: "timer__count-wrapper" }, [
+          _c("h2", { staticClass: "timer__label" }, [
+            _vm._v("Gesamte Arbeitszeit")
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "timer__count" }, [
+            _c("span", { staticClass: "timer__hours" }, [
+              _vm._v(_vm._s(_vm.overallWorkTime.utc().format("HH")))
+            ]),
+            _vm._v("\n        :\n        "),
+            _c("span", { staticClass: "timer__minutes" }, [
+              _vm._v(_vm._s(_vm.overallWorkTime.utc().format("mm")))
+            ]),
+            _vm._v("\n        :\n        "),
+            _c("span", { staticClass: "timer__seconds" }, [
+              _vm._v(_vm._s(_vm.overallWorkTime.utc().format("ss")))
+            ])
+          ])
+        ]),
         _vm._v(" "),
         _c("div", { staticClass: "timer__count-wrapper" }, [
           _c(
             "h2",
             { staticClass: "timer__label" },
             [
-              _vm._v("Aktuelle "),
+              _vm._v("Aktuelle\n        "),
               _c("transition", { attrs: { name: "t_turn", mode: "out-in" } }, [
                 _vm.paused
                   ? _c("span", { key: "pause" }, [_vm._v("Pausenzeit")])
@@ -19751,10 +19981,40 @@ var render = function() {
             1
           ),
           _vm._v(" "),
-          _vm._m(1)
+          _c("p", { staticClass: "timer__count timer__count--small" }, [
+            _c("span", { staticClass: "timer__hours" }, [
+              _vm._v(_vm._s(_vm.currentTime.utc().format("HH")))
+            ]),
+            _vm._v("\n        :\n        "),
+            _c("span", { staticClass: "timer__minutes" }, [
+              _vm._v(_vm._s(_vm.currentTime.utc().format("mm")))
+            ]),
+            _vm._v("\n        :\n        "),
+            _c("span", { staticClass: "timer__seconds" }, [
+              _vm._v(_vm._s(_vm.currentTime.utc().format("ss")))
+            ])
+          ])
         ]),
         _vm._v(" "),
-        _vm._m(2)
+        _c("div", { staticClass: "timer__count-wrapper" }, [
+          _c("h2", { staticClass: "timer__label" }, [
+            _vm._v("Gesamte Pausenzeit")
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "timer__count timer__count--small" }, [
+            _c("span", { staticClass: "timer__hours" }, [
+              _vm._v(_vm._s(_vm.overallPauseTime.utc().format("HH")))
+            ]),
+            _vm._v("\n        :\n        "),
+            _c("span", { staticClass: "timer__minutes" }, [
+              _vm._v(_vm._s(_vm.overallPauseTime.utc().format("mm")))
+            ]),
+            _vm._v("\n        :\n        "),
+            _c("span", { staticClass: "timer__seconds" }, [
+              _vm._v(_vm._s(_vm.overallPauseTime.utc().format("ss")))
+            ])
+          ])
+        ])
       ]),
       _vm._v(" "),
       _c("transition", { attrs: { name: "t_turn", mode: "out-in" } }, [
@@ -19866,54 +20126,7 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "timer__count-wrapper" }, [
-      _c("h2", { staticClass: "timer__label" }, [
-        _vm._v("Gesamte Arbeitszeit")
-      ]),
-      _vm._v(" "),
-      _c("p", { staticClass: "timer__count" }, [
-        _c("span", { staticClass: "timer__hours" }, [_vm._v("00")]),
-        _vm._v("\n        :\n        "),
-        _c("span", { staticClass: "timer__minutes" }, [_vm._v("00")]),
-        _vm._v("\n        :\n        "),
-        _c("span", { staticClass: "timer__seconds" }, [_vm._v("00")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("p", { staticClass: "timer__count timer__count--small" }, [
-      _c("span", { staticClass: "timer__hours" }, [_vm._v("00")]),
-      _vm._v("\n        :\n        "),
-      _c("span", { staticClass: "timer__minutes" }, [_vm._v("00")]),
-      _vm._v("\n        :\n        "),
-      _c("span", { staticClass: "timer__seconds" }, [_vm._v("00")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "timer__count-wrapper" }, [
-      _c("h2", { staticClass: "timer__label" }, [_vm._v("Gesamte Pausenzeit")]),
-      _vm._v(" "),
-      _c("p", { staticClass: "timer__count timer__count--small" }, [
-        _c("span", { staticClass: "timer__hours" }, [_vm._v("00")]),
-        _vm._v("\n        :\n        "),
-        _c("span", { staticClass: "timer__minutes" }, [_vm._v("00")]),
-        _vm._v("\n        :\n        "),
-        _c("span", { staticClass: "timer__seconds" }, [_vm._v("00")])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 if (false) {
