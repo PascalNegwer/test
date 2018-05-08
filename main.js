@@ -10143,47 +10143,83 @@ if (false) {(function () {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
-    beforeCreate: function () {
-        document.documentElement.className = 'u_gradient-background--mixed';
-    },
-    name: 'account',
-    props: [],
-    data() {
-        return {}
-    },
-    methods: {
-        save: function () {
-
-
-            this.$user.save({
-                onOk: result => {
-                    EventBus.$emit('newMessage', {
-                        message: 'Deine Accountdaten wurden erfolgreich geändert', type: __WEBPACK_IMPORTED_MODULE_0__classes_MessageTypes__["b" /* SUCCESS */]
-                    });
-                },
-                onError: error => {
-                    switch (error.statusCode) {
-                        case 0:
-                        case 615:
-                            EventBus.$emit('newMessage', {
-                                message: 'Oops! Scheint als hättest du keine Internetverbindung.',
-                                type: __WEBPACK_IMPORTED_MODULE_0__classes_MessageTypes__["c" /* WARNING */]
-                            });
-                            break;
-                        default:
-                            console.log(error);
-                            EventBus.$emit('newMessage', {
-                                message: 'Oops! Unbekannter Fehler.', type: __WEBPACK_IMPORTED_MODULE_0__classes_MessageTypes__["a" /* ERROR */]
-                            });
-                    }
-                },
-            });
-        }
+  beforeCreate: function () {
+    document.documentElement.className = 'u_gradient-background--mixed';
+  },
+  name: 'account',
+  props: [],
+  data() {
+    return {
+      confirmPassword: '',
+      newPassword: '',
     }
+  },
+  methods: {
+    save: function () {
+      this.$user.save({
+        onOk: result => {
+          EventBus.$emit('newMessage', {message: 'Deine Accountdaten wurden erfolgreich geändert', type: __WEBPACK_IMPORTED_MODULE_0__classes_MessageTypes__["b" /* SUCCESS */]});
+        },
+        onError: error => {
+          switch (error.statusCode) {
+            case 0:
+            case 615:
+              EventBus.$emit('newMessage', {message: 'Oops! Scheint als hättest du keine Internetverbindung.', type: __WEBPACK_IMPORTED_MODULE_0__classes_MessageTypes__["c" /* WARNING */]});
+              break;
+            default:
+              console.log(error);
+              EventBus.$emit('newMessage', {message: 'Oops! Unbekannter Fehler.', type: __WEBPACK_IMPORTED_MODULE_0__classes_MessageTypes__["a" /* ERROR */]});
+          }
+        },
+      });
+    },
+    changePassword: function () {
+      if (!navigator.onLine) {
+        EventBus.$emit('newMessage', {message: 'Oops! Scheint als hättest du keine Internetverbindung.', type: __WEBPACK_IMPORTED_MODULE_0__classes_MessageTypes__["a" /* ERROR */]});
+        return;
+      }
+      if (this.confirmPassword !== this.newPassword) {
+        EventBus.$emit('newMessage', {message: 'Die eingegebenen Passwörter stimmen nicht überein.', type: __WEBPACK_IMPORTED_MODULE_0__classes_MessageTypes__["c" /* WARNING */]});
+        return;
+      }
+
+      Apiomat.Datastore.configureWithCredentials(this.$user);
+
+      this.$user.changePassword(this.newPassword, {
+
+        onOk: result => {
+          EventBus.$emit('newMessage', {message: 'Dein Passwort wurde geändert', type: __WEBPACK_IMPORTED_MODULE_0__classes_MessageTypes__["b" /* SUCCESS */]});
+        },
+        onError: error => {
+          switch (error.statusCode) {
+            case 840:
+              console.log(error);
+              EventBus.$emit('newMessage', {message: 'Dein altes Passwort ist inkorrekt.', type: __WEBPACK_IMPORTED_MODULE_0__classes_MessageTypes__["c" /* WARNING */]});
+              break;
+            default:
+              console.log(error);
+              EventBus.$emit('newMessage', {message: 'Oops! Unbekannter Fehler.', type: __WEBPACK_IMPORTED_MODULE_0__classes_MessageTypes__["a" /* ERROR */]});
+          }
+        }
+      });
+    }
+  }
 });
 
 
@@ -20348,7 +20384,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.btn[data-v-c22ac84c] {\n    margin-top: 2.4rem;\n    margin-left: auto;\n}\n.inp[data-v-c22ac84c] {\n    margin: 1rem 0 2rem 0;\n}\n.label[data-v-c22ac84c] {\n  font-weight: 300;\n  color: var(--lightgrey);\n  font-size: 1.4rem;\n}\n", ""]);
+exports.push([module.i, "\n.btn[data-v-c22ac84c] {\n  margin-top: 2.4rem;\n  margin-left: auto;\n}\n.inp[data-v-c22ac84c] {\n  margin: 1rem 0 2rem 0;\n}\n.label[data-v-c22ac84c] {\n  font-weight: 300;\n  color: var(--lightgrey);\n  font-size: 1.4rem;\n}\n", ""]);
 
 // exports
 
@@ -20465,7 +20501,115 @@ var render = function() {
       )
     ]),
     _vm._v(" "),
-    _c("span", { staticClass: "l_divider" })
+    _c("span", { staticClass: "l_divider" }),
+    _vm._v(" "),
+    _c("section", { staticClass: "l_section" }, [
+      _c("h2", { staticClass: "headline" }, [_vm._v("Passwort ändern")]),
+      _vm._v(" "),
+      _c(
+        "form",
+        {
+          staticClass: "l_flex",
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.changePassword($event)
+            }
+          }
+        },
+        [
+          _c("p", { staticClass: "label" }, [_vm._v("Altes Passwort")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.$user.data.password,
+                expression: "$user.data.password"
+              }
+            ],
+            staticClass: "inp",
+            attrs: {
+              placeholder: "Altes Passwort",
+              type: "password",
+              required: ""
+            },
+            domProps: { value: _vm.$user.data.password },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.$user.data, "password", $event.target.value)
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("p", { staticClass: "label" }, [_vm._v("Neues Passwort")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.newPassword,
+                expression: "newPassword"
+              }
+            ],
+            staticClass: "inp",
+            attrs: {
+              placeholder: "Neues Passwort",
+              type: "password",
+              required: ""
+            },
+            domProps: { value: _vm.newPassword },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.newPassword = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("p", { staticClass: "label" }, [
+            _vm._v("Neues Passwort wiederholen")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.confirmPassword,
+                expression: "confirmPassword"
+              }
+            ],
+            staticClass: "inp",
+            attrs: {
+              placeholder: "Passwort wiederholen",
+              type: "password",
+              required: ""
+            },
+            domProps: { value: _vm.confirmPassword },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.confirmPassword = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("button", { staticClass: "btn", attrs: { type: "submit" } }, [
+            _vm._v("Passwort ändern")
+          ])
+        ]
+      )
+    ])
   ])
 }
 var staticRenderFns = []
