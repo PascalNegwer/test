@@ -21538,7 +21538,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.l_flex[data-v-26a14096] {\n  flex-grow: 0;\n  flex-shrink: 1;\n}\n.exercise[data-v-26a14096] {\n  height: 100%;\n  justify-content: center;\n  align-items: center;\n}\n.exercise__gif[data-v-26a14096] {\n  flex-shrink: 1;\n  width: 100%;\n  flex-grow: 1;\n  background-repeat: no-repeat;\n  background-size: contain;\n  background-position: center;\n}\n.exercise__description[data-v-26a14096] {\n  font-size: 1.4rem;\n  text-align: center;\n  line-height: 1.2;\n  margin: 2rem 0;\n}\n.test[data-v-26a14096] {\n}\n", ""]);
+exports.push([module.i, "\n.l_flex[data-v-26a14096] {\n  flex-grow: 0;\n  flex-shrink: 1;\n}\n.exercise[data-v-26a14096] {\n  height: 100%;\n  justify-content: center;\n  align-items: center;\n}\n.exercise__gif[data-v-26a14096] {\n  flex-shrink: 1;\n  width: 100%;\n  flex-grow: 1;\n  background-repeat: no-repeat;\n  background-size: contain;\n  background-position: center;\n}\n.exercise__description[data-v-26a14096] {\n  font-size: 1.4rem;\n  text-align: center;\n  line-height: 1.2;\n  margin-top: 2rem;\n}\n.test[data-v-26a14096] {\n}\n", ""]);
 
 // exports
 
