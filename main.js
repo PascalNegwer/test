@@ -10654,6 +10654,7 @@ if (false) {(function () {
 //
 //
 //
+//
 
 
 
@@ -21538,7 +21539,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.l_flex[data-v-26a14096] {\n  flex-grow: 0;\n  flex-shrink: 1;\n}\n.exercise[data-v-26a14096] {\n  height: 100%;\n  justify-content: center;\n  align-items: center;\n}\n.exercise__gif[data-v-26a14096] {\n  flex-shrink: 1;\n  width: 100%;\n  flex-grow: 1;\n  background-repeat: no-repeat;\n  background-size: contain;\n  background-position: center;\n}\n.exercise__description[data-v-26a14096] {\n  font-size: 1.4rem;\n  text-align: center;\n  line-height: 1.2;\n  margin-top: 2rem;\n}\n.test[data-v-26a14096] {\n}\n", ""]);
+exports.push([module.i, "\n.l_flex[data-v-26a14096] {\n  flex-grow: 0;\n  flex-shrink: 1;\n}\n.exercise[data-v-26a14096] {\n  height: 100%;\n  justify-content: center;\n  align-items: center;\n}\n.exercise__gif[data-v-26a14096] {\n  flex-shrink: 1;\n  width: 100%;\n  flex-grow: 1;\n  background-repeat: no-repeat;\n  background-size: contain;\n  background-position: center;\n}\n.exercise__description[data-v-26a14096] {\n  font-size: 1.4rem;\n  text-align: center;\n  line-height: 1.2;\n  margin-top: 2rem;\n}\n.back-button[data-v-26a14096] {\n  margin-right: auto;\n  margin-bottom: 2rem;\n}\n", ""]);
 
 // exports
 
@@ -21555,6 +21556,8 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "l_wrapper l_wrapper--small l_flex" }, [
+    _c("p", { staticClass: "btn btn--12 back-button" }, [_vm._v("zurück")]),
+    _vm._v(" "),
     _vm.loading
       ? _c("div", [_vm._v("Loading")])
       : _c("section", { staticClass: "exercise l_flex" }, [
