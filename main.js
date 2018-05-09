@@ -20606,7 +20606,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.navtab-container[data-v-7ce4a108] {\n  justify-content: space-between;\n  height: 100%;\n  padding-top: 2rem;\n  padding-bottom: 2rem;\n}\n.navtab[data-v-7ce4a108] {\n  background: var(--white-50);\n  flex-grow: 1;\n  border-radius: .8rem;\n  max-height: 28%;\n  transition: background .15s ease-in-out;\n  display: flex;\n  flex-direction: column;\n  padding: 2rem;\n  justify-content: space-between;\n}\n.navtab[data-v-7ce4a108]:active {\n  background: var(--white);\n}\n.navtab[data-v-7ce4a108]:before {\n  font-size: 10vh;\n  text-align: center;\n  max-height: 60px;\n}\n.navtab__label[data-v-7ce4a108] {\n  color: var(--white);\n  text-transform: uppercase;\n  font-size: 1.4rem;\n  font-weight: 300;\n  font-family: 'Comfortaa', sans-serif;\n  text-align: center;\n  margin-top: .8rem;\n}\n", ""]);
+exports.push([module.i, "\n.navtab-container[data-v-7ce4a108] {\n  justify-content: space-between;\n  height: 100%;\n  padding-top: 2rem;\n  padding-bottom: 2rem;\n}\n.navtab[data-v-7ce4a108] {\n  background: var(--white-50);\n  flex-grow: 1;\n  border-radius: .8rem;\n  max-height: 28%;\n  transition: background .15s ease-in-out;\n  display: flex;\n  flex-direction: column;\n  padding: 2rem;\n  justify-content: center;\n}\n.navtab[data-v-7ce4a108]:active {\n  background: var(--white);\n}\n.navtab[data-v-7ce4a108]:before {\n  font-size: 10vh;\n  text-align: center;\n}\n.navtab__label[data-v-7ce4a108] {\n  color: var(--white);\n  text-transform: uppercase;\n  font-size: 1.4rem;\n  font-weight: 300;\n  font-family: 'Comfortaa', sans-serif;\n  text-align: center;\n  margin-top: .8rem;\n}\n", ""]);
 
 // exports
 
