@@ -10082,6 +10082,8 @@ if (false) {(function () {
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   beforeCreate: function() {
@@ -20604,7 +20606,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.navtab[data-v-7ce4a108] {\n  background: var(--white-50);\n  flex-grow: 1;\n  border-radius: .8rem;\n  margin: 2rem 0;\n  transition: background .15s ease-in-out;\n  display: flex;\n  flex-direction: column;\n  padding: 2rem;\n  justify-content: space-between;\n}\n.navtab[data-v-7ce4a108]:active {\n  background: var(--white);\n}\n.navtab[data-v-7ce4a108]:before {\n  font-size: 10vh;\n  text-align: center;\n}\n.navtab__label[data-v-7ce4a108] {\n  color: var(--white);\n  text-transform: uppercase;\n  font-size: 1.4rem;\n  font-weight: 300;\n  font-family: 'Comfortaa', sans-serif;\n  text-align: center;\n  margin-top: .8rem;\n}\n", ""]);
+exports.push([module.i, "\n.navtab-container[data-v-7ce4a108] {\n  justify-content: space-between;\n  height: 100%;\n  padding-top: 4rem;\n  padding-bottom: 4rem;\n}\n.navtab[data-v-7ce4a108] {\n  background: var(--white-50);\n  flex-grow: 1;\n  border-radius: .8rem;\n  max-height: 28%;\n  transition: background .15s ease-in-out;\n  display: flex;\n  flex-direction: column;\n  padding: 2rem;\n  justify-content: space-between;\n}\n.navtab[data-v-7ce4a108]:active {\n  background: var(--white);\n}\n.navtab[data-v-7ce4a108]:before {\n  font-size: 10vh;\n  text-align: center;\n  max-height: 60px;\n}\n.navtab__label[data-v-7ce4a108] {\n  color: var(--white);\n  text-transform: uppercase;\n  font-size: 1.4rem;\n  font-weight: 300;\n  font-family: 'Comfortaa', sans-serif;\n  text-align: center;\n  margin-top: .8rem;\n}\n", ""]);
 
 // exports
 
@@ -20620,30 +20622,35 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "nav",
-    { staticClass: "l_wrapper l_flex" },
-    [
-      _c(
-        "router-link",
-        { staticClass: "navtab u_icon--gym", attrs: { to: "/workout" } },
-        [_c("p", { staticClass: "navtab__label" }, [_vm._v("Workout")])]
-      ),
-      _vm._v(" "),
-      _c(
-        "router-link",
-        { staticClass: "navtab u_icon--eye", attrs: { to: "/augenuebungen" } },
-        [_c("p", { staticClass: "navtab__label" }, [_vm._v("Augenübungen")])]
-      ),
-      _vm._v(" "),
-      _c(
-        "router-link",
-        { staticClass: "navtab u_icon--chair", attrs: { to: "/ergonomie" } },
-        [_c("p", { staticClass: "navtab__label" }, [_vm._v("Ergonomie")])]
-      )
-    ],
-    1
-  )
+  return _c("div", { staticClass: "l_wrapper l_flex" }, [
+    _c(
+      "nav",
+      { staticClass: "l_flex navtab-container" },
+      [
+        _c(
+          "router-link",
+          { staticClass: "navtab u_icon--gym", attrs: { to: "/workout" } },
+          [_c("p", { staticClass: "navtab__label" }, [_vm._v("Workout")])]
+        ),
+        _vm._v(" "),
+        _c(
+          "router-link",
+          {
+            staticClass: "navtab u_icon--eye",
+            attrs: { to: "/augenuebungen" }
+          },
+          [_c("p", { staticClass: "navtab__label" }, [_vm._v("Augenübungen")])]
+        ),
+        _vm._v(" "),
+        _c(
+          "router-link",
+          { staticClass: "navtab u_icon--chair", attrs: { to: "/ergonomie" } },
+          [_c("p", { staticClass: "navtab__label" }, [_vm._v("Ergonomie")])]
+        )
+      ],
+      1
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
