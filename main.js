@@ -20675,7 +20675,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n.eyelink-style[data-v-3e2581b2] {\n  font-family: Comfortaa, sans-serif;\n  font-size: 1.6rem;\n  justify-content: space-between;\n  padding-right: 14%;\n  align-items: center;\n  transition: opacity .15s ease-in-out;\n  line-height: 3;\n}\n.eyelink-style[data-v-3e2581b2]:active, .eyelink-style[data-v-3e2581b2]:active:before {\n  opacity: .5;\n}\n.eyelink-style[data-v-3e2581b2]:before {\n  transition: opacity .15s ease-in-out;\n  order: 1;\n  transform: rotate(-90deg);\n  font-size: 2rem;\n}\n.list-item[data-v-3e2581b2] {\n  width: 100%;\n}\n\n", ""]);
 
 // exports
 
@@ -20692,17 +20692,22 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "l_wrapper l_wrapper--small" }, [
-    _c("h1", [_vm._v("Augenübungen")]),
+    _c("h1", { staticClass: "headline headline--main" }, [
+      _vm._v("Augenübungen")
+    ]),
     _vm._v(" "),
     _c(
       "ul",
       _vm._l(_vm.eyeExercises, function(eyeExercise) {
         return _c(
           "li",
+          { staticClass: "list-item" },
           [
             _c(
               "router-link",
               {
+                staticClass:
+                  "eyelink-style u_icon--down l_flex l_flex--horizontal",
                 attrs: {
                   eyeExercise: eyeExercise,
                   to: {
