@@ -10670,7 +10670,11 @@ if (false) {(function () {
       eyeExercises: undefined,
     }
   },
-  methods: {},
+  methods: {
+    goBack: function() {
+      window.history.back();
+    },
+  },
   beforeMount: function() {
     console.log(this.id);
     this.eyeExercises = Apiomat.EyeExercise.getEyeExercises('id == id(' + this.id + ')', {
@@ -21556,7 +21560,18 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "l_wrapper l_wrapper--small l_flex" }, [
-    _c("p", { staticClass: "btn btn--12 back-button" }, [_vm._v("zurück")]),
+    _c(
+      "p",
+      {
+        staticClass: "btn btn--12 back-button",
+        on: {
+          click: function($event) {
+            _vm.goBack()
+          }
+        }
+      },
+      [_vm._v("zurück")]
+    ),
     _vm._v(" "),
     _vm.loading
       ? _c("div", [_vm._v("Loading")])
