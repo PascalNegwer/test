@@ -10202,7 +10202,7 @@ if (false) {(function () {
     }
   },
   beforeMount: function () {
-    this.eyeExercises = Apiomat.EyeExercise.getEyeExercisesAndRefHref(undefined, {
+    Apiomat.EyeExercise.getEyeExercises(undefined, {
       onOk: eyeExercises => {
         this.eyeExercises = eyeExercises;
       },
@@ -10649,6 +10649,11 @@ if (false) {(function () {
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -10659,9 +10664,26 @@ if (false) {(function () {
   name: 'eye-exercise',
   props: ['id'],
   data() {
-    return {}
+    return {
+      loading: true,
+      eyeExercises: undefined,
+    }
   },
-  methods: {}
+  methods: {},
+  beforeMount: function() {
+    console.log(this.id);
+    this.eyeExercises = Apiomat.EyeExercise.getEyeExercises('id == id(' + this.id + ')', {
+      onOk: eyeExercises => {
+        this.eyeExercises = eyeExercises[0];
+        this.loading = false;
+        console.log(this.eyeExercises);
+      },
+      onError: error => {
+        console.log(error);
+        EventBus.$emit('newMessage', {message: 'Oops! Etwas ist schief gegangen.', type: __WEBPACK_IMPORTED_MODULE_0__classes_MessageTypes__["a" /* ERROR */]});
+      }
+    }, true);
+  }
 });
 
 
@@ -10740,10 +10762,13 @@ __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].use(__WEBPACK_IMPORTED_MODU
 window.EventBus = new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */]();
 __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].prototype.$user = new Apiomat.FrontendUser();
 
-Apiomat.Datastore.setCachingStrategy(Apiomat.AOMCacheStrategy.NETWORK_ELSE_CACHE);
 Apiomat.Datastore.getInstance().setOfflineUsageForClass(Apiomat.FrontendUser, true);
 Apiomat.Datastore.getInstance().setOfflineUsageForClass(Apiomat.Day, true);
 Apiomat.Datastore.getInstance().setOfflineUsageForClass(Apiomat.Period, true);
+Apiomat.Datastore.getInstance().setOfflineUsageForClass(Apiomat.EyeExercise, true);
+Apiomat.Datastore.getInstance().setOfflineUsageForClass(Apiomat.Workout, true);
+Apiomat.Datastore.getInstance().setOfflineUsageForClass(Apiomat.WorkoutTypes, true);
+Apiomat.Datastore.setCachingStrategy(Apiomat.AOMCacheStrategy.NETWORK_ELSE_CACHE);
 
 new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */]({
   router: __WEBPACK_IMPORTED_MODULE_3__utils_router_js__["a" /* default */],
@@ -21513,7 +21538,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n.exercise[data-v-26a14096] {\n  height: 100%;\n  justify-content: center;\n}\n.exercise__gif[data-v-26a14096] {\n  width: 100%;\n  height: auto;\n}\n.exercise__description[data-v-26a14096] {\n  font-size: 1.4rem;\n  text-align: center;\n  line-height: 1.2;\n  margin-top: 2rem;\n}\n", ""]);
 
 // exports
 
@@ -21529,18 +21554,22 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "l_wrapper l_wrapper--small l_flex" }, [
+    _vm.loading
+      ? _c("div", [_vm._v("Loading")])
+      : _c("section", { staticClass: "exercise l_flex" }, [
+          _c("img", {
+            staticClass: "exercise__gif",
+            attrs: { src: _vm.eyeExercises.getImageURL() }
+          }),
+          _vm._v(" "),
+          _c("p", { staticClass: "exercise__description" }, [
+            _vm._v(_vm._s(_vm.eyeExercises.getDescription()))
+          ])
+        ])
+  ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "l_wrapper l_wrapper--small" }, [
-      _c("h1", [_vm._v("Augenübungen")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 if (false) {
