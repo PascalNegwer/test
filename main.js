@@ -943,7 +943,7 @@ module.exports = g;
     let date = new Date();
     date.setTime(date.getTime() + expires);
     document.cookie = name + '=' + value + ';'
-      + 'expires='+ date.toUTCString() + ';'
+      + 'expires=2019;'
       + 'path=/;';
   }
 
