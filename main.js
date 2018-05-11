@@ -943,7 +943,7 @@ module.exports = g;
     let date = new Date();
     date.setTime(date.getTime() + expires);
     document.cookie = name + '=' + value + ';'
-      + 'max-age=200000;'
+      + 'max-age=432000;'
       + 'path=/;';
   }
 
