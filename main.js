@@ -503,196 +503,6 @@ const SUCCESS = 'success';
 
 /***/ }),
 /* 4 */
-/***/ (function(module, exports) {
-
-// shim for using process in browser
-var process = module.exports = {};
-
-// cached from whatever global is present so that test runners that stub it
-// don't break things.  But we need to wrap it in a try catch in case it is
-// wrapped in strict mode code which doesn't define any globals.  It's inside a
-// function because try/catches deoptimize in certain engines.
-
-var cachedSetTimeout;
-var cachedClearTimeout;
-
-function defaultSetTimout() {
-    throw new Error('setTimeout has not been defined');
-}
-function defaultClearTimeout () {
-    throw new Error('clearTimeout has not been defined');
-}
-(function () {
-    try {
-        if (typeof setTimeout === 'function') {
-            cachedSetTimeout = setTimeout;
-        } else {
-            cachedSetTimeout = defaultSetTimout;
-        }
-    } catch (e) {
-        cachedSetTimeout = defaultSetTimout;
-    }
-    try {
-        if (typeof clearTimeout === 'function') {
-            cachedClearTimeout = clearTimeout;
-        } else {
-            cachedClearTimeout = defaultClearTimeout;
-        }
-    } catch (e) {
-        cachedClearTimeout = defaultClearTimeout;
-    }
-} ())
-function runTimeout(fun) {
-    if (cachedSetTimeout === setTimeout) {
-        //normal enviroments in sane situations
-        return setTimeout(fun, 0);
-    }
-    // if setTimeout wasn't available but was latter defined
-    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
-        cachedSetTimeout = setTimeout;
-        return setTimeout(fun, 0);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedSetTimeout(fun, 0);
-    } catch(e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
-            return cachedSetTimeout.call(null, fun, 0);
-        } catch(e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
-            return cachedSetTimeout.call(this, fun, 0);
-        }
-    }
-
-
-}
-function runClearTimeout(marker) {
-    if (cachedClearTimeout === clearTimeout) {
-        //normal enviroments in sane situations
-        return clearTimeout(marker);
-    }
-    // if clearTimeout wasn't available but was latter defined
-    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
-        cachedClearTimeout = clearTimeout;
-        return clearTimeout(marker);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedClearTimeout(marker);
-    } catch (e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
-            return cachedClearTimeout.call(null, marker);
-        } catch (e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
-            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
-            return cachedClearTimeout.call(this, marker);
-        }
-    }
-
-
-
-}
-var queue = [];
-var draining = false;
-var currentQueue;
-var queueIndex = -1;
-
-function cleanUpNextTick() {
-    if (!draining || !currentQueue) {
-        return;
-    }
-    draining = false;
-    if (currentQueue.length) {
-        queue = currentQueue.concat(queue);
-    } else {
-        queueIndex = -1;
-    }
-    if (queue.length) {
-        drainQueue();
-    }
-}
-
-function drainQueue() {
-    if (draining) {
-        return;
-    }
-    var timeout = runTimeout(cleanUpNextTick);
-    draining = true;
-
-    var len = queue.length;
-    while(len) {
-        currentQueue = queue;
-        queue = [];
-        while (++queueIndex < len) {
-            if (currentQueue) {
-                currentQueue[queueIndex].run();
-            }
-        }
-        queueIndex = -1;
-        len = queue.length;
-    }
-    currentQueue = null;
-    draining = false;
-    runClearTimeout(timeout);
-}
-
-process.nextTick = function (fun) {
-    var args = new Array(arguments.length - 1);
-    if (arguments.length > 1) {
-        for (var i = 1; i < arguments.length; i++) {
-            args[i - 1] = arguments[i];
-        }
-    }
-    queue.push(new Item(fun, args));
-    if (queue.length === 1 && !draining) {
-        runTimeout(drainQueue);
-    }
-};
-
-// v8 likes predictible objects
-function Item(fun, array) {
-    this.fun = fun;
-    this.array = array;
-}
-Item.prototype.run = function () {
-    this.fun.apply(null, this.array);
-};
-process.title = 'browser';
-process.browser = true;
-process.env = {};
-process.argv = [];
-process.version = ''; // empty string to avoid regexp issues
-process.versions = {};
-
-function noop() {}
-
-process.on = noop;
-process.addListener = noop;
-process.once = noop;
-process.off = noop;
-process.removeListener = noop;
-process.removeAllListeners = noop;
-process.emit = noop;
-process.prependListener = noop;
-process.prependOnceListener = noop;
-
-process.listeners = function (name) { return [] }
-
-process.binding = function (name) {
-    throw new Error('process.binding is not supported');
-};
-
-process.cwd = function () { return '/' };
-process.chdir = function (dir) {
-    throw new Error('process.chdir is not supported');
-};
-process.umask = function() { return 0; };
-
-
-/***/ }),
-/* 5 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -891,6 +701,196 @@ function loggedInOnly(to, from, next) {
 /* harmony default export */ __webpack_exports__["a"] = (router);
 
 /***/ }),
+/* 5 */
+/***/ (function(module, exports) {
+
+// shim for using process in browser
+var process = module.exports = {};
+
+// cached from whatever global is present so that test runners that stub it
+// don't break things.  But we need to wrap it in a try catch in case it is
+// wrapped in strict mode code which doesn't define any globals.  It's inside a
+// function because try/catches deoptimize in certain engines.
+
+var cachedSetTimeout;
+var cachedClearTimeout;
+
+function defaultSetTimout() {
+    throw new Error('setTimeout has not been defined');
+}
+function defaultClearTimeout () {
+    throw new Error('clearTimeout has not been defined');
+}
+(function () {
+    try {
+        if (typeof setTimeout === 'function') {
+            cachedSetTimeout = setTimeout;
+        } else {
+            cachedSetTimeout = defaultSetTimout;
+        }
+    } catch (e) {
+        cachedSetTimeout = defaultSetTimout;
+    }
+    try {
+        if (typeof clearTimeout === 'function') {
+            cachedClearTimeout = clearTimeout;
+        } else {
+            cachedClearTimeout = defaultClearTimeout;
+        }
+    } catch (e) {
+        cachedClearTimeout = defaultClearTimeout;
+    }
+} ())
+function runTimeout(fun) {
+    if (cachedSetTimeout === setTimeout) {
+        //normal enviroments in sane situations
+        return setTimeout(fun, 0);
+    }
+    // if setTimeout wasn't available but was latter defined
+    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
+        cachedSetTimeout = setTimeout;
+        return setTimeout(fun, 0);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedSetTimeout(fun, 0);
+    } catch(e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
+            return cachedSetTimeout.call(null, fun, 0);
+        } catch(e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
+            return cachedSetTimeout.call(this, fun, 0);
+        }
+    }
+
+
+}
+function runClearTimeout(marker) {
+    if (cachedClearTimeout === clearTimeout) {
+        //normal enviroments in sane situations
+        return clearTimeout(marker);
+    }
+    // if clearTimeout wasn't available but was latter defined
+    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
+        cachedClearTimeout = clearTimeout;
+        return clearTimeout(marker);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedClearTimeout(marker);
+    } catch (e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
+            return cachedClearTimeout.call(null, marker);
+        } catch (e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
+            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
+            return cachedClearTimeout.call(this, marker);
+        }
+    }
+
+
+
+}
+var queue = [];
+var draining = false;
+var currentQueue;
+var queueIndex = -1;
+
+function cleanUpNextTick() {
+    if (!draining || !currentQueue) {
+        return;
+    }
+    draining = false;
+    if (currentQueue.length) {
+        queue = currentQueue.concat(queue);
+    } else {
+        queueIndex = -1;
+    }
+    if (queue.length) {
+        drainQueue();
+    }
+}
+
+function drainQueue() {
+    if (draining) {
+        return;
+    }
+    var timeout = runTimeout(cleanUpNextTick);
+    draining = true;
+
+    var len = queue.length;
+    while(len) {
+        currentQueue = queue;
+        queue = [];
+        while (++queueIndex < len) {
+            if (currentQueue) {
+                currentQueue[queueIndex].run();
+            }
+        }
+        queueIndex = -1;
+        len = queue.length;
+    }
+    currentQueue = null;
+    draining = false;
+    runClearTimeout(timeout);
+}
+
+process.nextTick = function (fun) {
+    var args = new Array(arguments.length - 1);
+    if (arguments.length > 1) {
+        for (var i = 1; i < arguments.length; i++) {
+            args[i - 1] = arguments[i];
+        }
+    }
+    queue.push(new Item(fun, args));
+    if (queue.length === 1 && !draining) {
+        runTimeout(drainQueue);
+    }
+};
+
+// v8 likes predictible objects
+function Item(fun, array) {
+    this.fun = fun;
+    this.array = array;
+}
+Item.prototype.run = function () {
+    this.fun.apply(null, this.array);
+};
+process.title = 'browser';
+process.browser = true;
+process.env = {};
+process.argv = [];
+process.version = ''; // empty string to avoid regexp issues
+process.versions = {};
+
+function noop() {}
+
+process.on = noop;
+process.addListener = noop;
+process.once = noop;
+process.off = noop;
+process.removeListener = noop;
+process.removeAllListeners = noop;
+process.emit = noop;
+process.prependListener = noop;
+process.prependOnceListener = noop;
+
+process.listeners = function (name) { return [] }
+
+process.binding = function (name) {
+    throw new Error('process.binding is not supported');
+};
+
+process.cwd = function () { return '/' };
+process.chdir = function (dir) {
+    throw new Error('process.chdir is not supported');
+};
+process.umask = function() { return 0; };
+
+
+/***/ }),
 /* 6 */
 /***/ (function(module, exports) {
 
@@ -943,7 +943,7 @@ module.exports = g;
     let date = new Date();
     date.setTime(date.getTime() + expires);
     document.cookie = name + '=' + value + ';'
-      + 'expires='+ date.toUTCString() + ';'
+      + 'max-age=432000;'
       + 'path=/;';
   }
 
@@ -8996,7 +8996,7 @@ if (inBrowser) {
 
 /* harmony default export */ __webpack_exports__["a"] = (Vue);
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(4), __webpack_require__(6), __webpack_require__(37).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(5), __webpack_require__(6), __webpack_require__(37).setImmediate))
 
 /***/ }),
 /* 9 */
@@ -9005,7 +9005,23 @@ if (inBrowser) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_main_MainNav_vue__ = __webpack_require__(44);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_cookie_js__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_router_js__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_router_js__ = __webpack_require__(4);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -9034,7 +9050,9 @@ if (inBrowser) {
   components: {MainNav: __WEBPACK_IMPORTED_MODULE_0__components_main_MainNav_vue__["a" /* default */]},
   data() {
     return {
-      flashMessages: []
+      flashMessages: [],
+      alert: undefined,
+      hideNav: false,
     }
   },
   methods: {
@@ -9043,6 +9061,10 @@ if (inBrowser) {
     },
     isMain() {
       return (this.$route.name !== 'signup' && this.$route.name !== 'login');
+    },
+    resetState() {
+      this.alert = undefined;
+      this.hideNav = false
     }
   },
   mounted: function () {
@@ -9066,6 +9088,11 @@ if (inBrowser) {
 
     EventBus.$on('clearFlashMessages', function () {
       self.flashMessages = [];
+    });
+
+    EventBus.$on('alert', function (alert) {
+      self.hideNav = true;
+      self.alert = alert;
     });
   }
 });
@@ -9185,7 +9212,13 @@ if (inBrowser) {
   name: "logout",
   methods: {
     logout() {
-      EventBus.$emit('loggedOut');
+      EventBus.$emit('alert', {
+        headline:'Ausloggen?',
+        text:'Möchtest du dich wirklich ausloggen?',
+        onOk: function () {
+          EventBus.$emit('loggedOut');
+        }
+      });
     }
   }
 });
@@ -9196,7 +9229,7 @@ if (inBrowser) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_router_js__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_router_js__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_validate_js__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_cookie_js__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__classes_MessageTypes__ = __webpack_require__(3);
@@ -9304,7 +9337,7 @@ if (inBrowser) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_router_js__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_router_js__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_validate_js__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__classes_MessageTypes__ = __webpack_require__(3);
 //
@@ -10280,6 +10313,7 @@ if (false) {(function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__classes_MessageTypes__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_router_js__ = __webpack_require__(4);
 //
 //
 //
@@ -10311,6 +10345,13 @@ if (false) {(function () {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -10374,7 +10415,42 @@ if (false) {(function () {
           }
         }
       });
-    }
+    },
+
+    deleteUser () {
+      if (!navigator.onLine) {
+        EventBus.$emit('newMessage', {
+          message: 'Oops! Scheint als hättest du keine Internetverbindung.',
+          type: __WEBPACK_IMPORTED_MODULE_0__classes_MessageTypes__["a" /* ERROR */]
+        });
+        return;
+      }
+      EventBus.$emit('alert', {
+        headline: 'Account löschen?',
+        text: 'Möchtest du deinen Account wirklich löschen?',
+        onOk: function () {
+
+          this.$user.deleteModel({
+            onOk: result => {
+              console.log(result);
+              console.log('gelöscht');
+              __WEBPACK_IMPORTED_MODULE_1__utils_router_js__["a" /* default */].push('/login');
+            },
+            onError: error => {
+              switch (error.statusCode) {
+                default:
+                  console.log(error);
+                  EventBus.$emit('newMessage', {message: 'Oops! Unbekannter Fehler.', type: __WEBPACK_IMPORTED_MODULE_0__classes_MessageTypes__["a" /* ERROR */]});
+              }
+            }
+          });
+        }.bind(this),
+        onError: error => {
+          console.log(error);
+          EventBus.$emit('newMessage', {message: 'Oops! Sehr unbekannter Fehler.', type: __WEBPACK_IMPORTED_MODULE_0__classes_MessageTypes__["a" /* ERROR */]});
+        }
+      });
+    },
   }
 });
 
@@ -10755,7 +10831,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vee_validate__ = __webpack_require__(39);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__App_vue__ = __webpack_require__(40);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_router_js__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_router_js__ = __webpack_require__(4);
 
 
 
@@ -11059,7 +11135,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6), __webpack_require__(4)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6), __webpack_require__(5)))
 
 /***/ }),
 /* 39 */
@@ -16132,7 +16208,7 @@ var index_esm = {
 /* harmony default export */ __webpack_exports__["a"] = (index_esm);
 
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(4)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(5)))
 
 /***/ }),
 /* 40 */
@@ -16228,7 +16304,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.flash-messages-container[data-v-04c2046b] {\n  top: 4rem;\n  left: 50%;\n  transform: translateX(-50%);\n  z-index: 100;\n  width: 100%;\n  padding: 0 3rem;\n  position: fixed;\n  display: flex;\n  flex-direction: column;\n}\n.flash-message[data-v-04c2046b] {\n  align-items: center;\n  display: flex;\n  font-family: 'Comfortaa', sans-serif;\n  background: var(--white);\n  font-weight: 300;\n  font-size: 1.6rem;\n  line-height: 1.5;\n  margin-bottom: 1rem;\n  border: var(--white) 1px solid;\n  padding: 2rem 1.5rem;\n}\n.flash-message__text[data-v-04c2046b] {\n  padding-left: 1.5rem;\n  flex-shrink: 1;\n}\n.flash-message[data-v-04c2046b]:before {\n  font-size: 4rem;\n}\n.flash-message--warning[data-v-04c2046b] {\n  border-color: var(--warning);\n  color: var(--warning);\n}\n.flash-message--success[data-v-04c2046b] {\n  border-color: var(--success);\n  color: var(--success);\n}\n.flash-message--error[data-v-04c2046b] {\n  border-color: var(--error);\n  color: var(--error);\n}\n", ""]);
+exports.push([module.i, "\n.alert-container[data-v-04c2046b] {\n  background: var(--white-25);\n  left: 50%;\n  top: 50%;\n  transform: translateX(-50%) translateY(-50%);\n  z-index: 1100;\n  width: 100%;\n  height: 100%;\n  padding: 8rem 2rem;\n  position: fixed;\n}\n.alert[data-v-04c2046b] {\n  background: var(--white-90);\n  border: var(--white) 1px solid;\n  color: var(--darkgrey);\n  flex-direction: column;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  padding: 2rem;\n  height: 100%;\n}\n.alert *[data-v-04c2046b] {\n  margin-bottom: 20px;\n}\n.alert__headline[data-v-04c2046b] {\n  font-size: 2.2rem;\n  font-weight: 500;\n}\n.alert__text[data-v-04c2046b] {\n  text-align: center;\n  font-size: 1.6rem;\n}\n.alert__btn[data-v-04c2046b] {\n  width: 90%;\n}\n.alert__btn--ok[data-v-04c2046b] {\n  background-color: var(--success-50);\n}\n.alert__btn--chancel[data-v-04c2046b] {\n  background-color: var(--error-50);\n}\n.flash-messages-container[data-v-04c2046b] {\n  top: 4rem;\n  left: 50%;\n  transform: translateX(-50%);\n  z-index: 100;\n  width: 100%;\n  padding: 0 3rem;\n  position: fixed;\n  display: flex;\n  flex-direction: column;\n}\n.flash-message[data-v-04c2046b] {\n  align-items: center;\n  display: flex;\n  font-family: 'Comfortaa', sans-serif;\n  background: var(--white);\n  font-weight: 300;\n  font-size: 1.6rem;\n  line-height: 1.5;\n  margin-bottom: 1rem;\n  border: var(--white) 1px solid;\n  padding: 2rem 1.5rem;\n}\n.flash-message__text[data-v-04c2046b] {\n  padding-left: 1.5rem;\n  flex-shrink: 1;\n}\n.flash-message[data-v-04c2046b]:before {\n  font-size: 4rem;\n}\n.flash-message--warning[data-v-04c2046b] {\n  border-color: var(--warning);\n  color: var(--warning);\n}\n.flash-message--success[data-v-04c2046b] {\n  border-color: var(--success);\n  color: var(--success);\n}\n.flash-message--error[data-v-04c2046b] {\n  border-color: var(--error);\n  color: var(--error);\n}\n", ""]);
 
 // exports
 
@@ -16362,7 +16438,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.nav {\n  width: 100%;\n  color: var(--grey);\n  position: fixed;\n  bottom: 0;\n  left: 0;\n  justify-content: space-between;\n  flex-wrap: nowrap;\n  z-index: 1000;\n}\n.nav--dropdown {\n  position: absolute;\n  bottom: 100%;\n  justify-content: center;\n  visibility: hidden;\n  opacity: 0;\n  transition: opacity .15s ease-in-out, visibility .15s .15s;\n  clip: rect(0, auto, auto, 0);\n}\n.nav--visible {\n  visibility: visible;\n  opacity: 1;\n  transition: opacity .15s ease-in-out;\n}\n.nav__item {\n  width: 25%;\n  display: block;\n  text-align: center;\n  transition: background .15s ease-in-out;\n  position: relative;\n}\n.nav__item:active, .nav__item--active {\n  background: var(--white-50);\n}\n.nav__item--dropdown {\n  display: block;\n  width: 100%;\n  background: var(--white-50);\n  margin-bottom: .2rem;\n  position: relative;\n}\n.nav__item--dropdown:active {\n  background: var(--white);\n}\n.nav__link {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n}\n.nav__icon {\n  padding: 2rem 0 1rem 0;\n  font-size: 3.2rem;\n  color: #5f5f5f;\n}\n.nav__icon:before {\n  transition: color .3s ease-in-out;\n}\n.nav__text {\n  font-size: 1.2rem;\n  font-weight: 400;\n  text-transform: uppercase;\n  text-align: center;\n  padding-bottom: 2rem;\n  transition: color .3s ease-in-out;\n}\n.nav__item--dropdown .nav__icon:before, .nav__item--dropdown .nav__text {\n  transition-duration: 0s;\n}\n.u_gradient-background--default .nav__icon, .u_gradient-background--mixed .nav__icon {\n  color: var(--lightgrey);\n}\n.u_gradient-background--default .nav__text, .u_gradient-background--mixed .nav__text {\n  color: var(--lightgrey);\n}\n", ""]);
+exports.push([module.i, "\n.nav {\n  width: 100%;\n  color: var(--grey);\n  position: fixed;\n  bottom: 0;\n  left: 0;\n  justify-content: space-between;\n  flex-wrap: nowrap;\n  z-index: 1000;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n}\n.nav--dropdown {\n  position: absolute;\n  bottom: 100%;\n  justify-content: center;\n  visibility: hidden;\n  opacity: 0;\n  transition: opacity .15s ease-in-out, visibility .15s .15s;\n  clip: rect(0, auto, auto, 0);\n}\n.nav--visible {\n  visibility: visible;\n  opacity: 1;\n  transition: opacity .15s ease-in-out;\n}\n.nav__item {\n  width: 25%;\n  display: block;\n  text-align: center;\n  transition: background .15s ease-in-out;\n  position: relative;\n}\n.nav__item:active, .nav__item--active {\n  background: var(--white-50);\n}\n.nav__item--dropdown {\n  display: block;\n  width: 100%;\n  background: var(--white-50);\n  margin-bottom: .2rem;\n  position: relative;\n}\n.nav__item--dropdown:active {\n  background: var(--white);\n}\n.nav__link {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n}\n.nav__icon {\n  padding: 2rem 0 1rem 0;\n  font-size: 3.2rem;\n  color: #5f5f5f;\n}\n.nav__icon:before {\n  transition: color .3s ease-in-out;\n}\n.nav__text {\n  font-size: 1.2rem;\n  font-weight: 400;\n  text-transform: uppercase;\n  text-align: center;\n  padding-bottom: 2rem;\n  transition: color .3s ease-in-out;\n}\n.nav__item--dropdown .nav__icon:before, .nav__item--dropdown .nav__text {\n  transition-duration: 0s;\n}\n.u_gradient-background--default .nav__icon, .u_gradient-background--mixed .nav__icon {\n  color: var(--lightgrey);\n}\n.u_gradient-background--default .nav__text, .u_gradient-background--mixed .nav__text {\n  color: var(--lightgrey);\n}\n", ""]);
 
 // exports
 
@@ -16461,7 +16537,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -19339,7 +19415,7 @@ if (inBrowser && window.Vue) {
 
 /* harmony default export */ __webpack_exports__["a"] = (VueRouter);
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(4)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(5)))
 
 /***/ }),
 /* 53 */
@@ -21035,6 +21111,28 @@ var render = function() {
           ])
         ]
       )
+    ]),
+    _vm._v(" "),
+    _c("span", { staticClass: "l_divider" }),
+    _vm._v(" "),
+    _c("section", { staticClass: "l_section" }, [
+      _c(
+        "form",
+        {
+          staticClass: "l_flex",
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.deleteUser($event)
+            }
+          }
+        },
+        [
+          _c("button", { staticClass: "btn", attrs: { type: "submit" } }, [
+            _vm._v("Account löschen")
+          ])
+        ]
+      )
     ])
   ])
 }
@@ -21914,12 +22012,61 @@ var render = function() {
             1
           ),
           _vm._v(" "),
+          _c("transition", { attrs: { name: "t_fade" } }, [
+            _vm.alert
+              ? _c("div", { staticClass: "alert-container" }, [
+                  _c("div", { staticClass: "alert" }, [
+                    _c("h2", { staticClass: "alert__headline" }, [
+                      _vm._v(_vm._s(_vm.alert.headline))
+                    ]),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "alert__text" }, [
+                      _vm._v(_vm._s(_vm.alert.text))
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn u_center alert__btn alert__btn--ok",
+                        on: {
+                          click: function($event) {
+                            _vm.alert.onOk()
+                            _vm.resetState()
+                          }
+                        }
+                      },
+                      [_vm._v("\n            Ja\n          ")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass:
+                          "btn u_center alert__btn alert__btn--chancel",
+                        on: {
+                          click: function($event) {
+                            _vm.resetState()
+                          }
+                        }
+                      },
+                      [_vm._v("\n            Abbrechen\n          ")]
+                    )
+                  ])
+                ])
+              : _vm._e()
+          ]),
+          _vm._v(" "),
           _c("router-view")
         ],
         1
       ),
       _vm._v(" "),
-      _vm.isMain() ? _c("main-nav") : _vm._e()
+      _c(
+        "transition",
+        { attrs: { name: "t_fade" } },
+        [_vm.isMain() && !_vm.hideNav ? _c("main-nav") : _vm._e()],
+        1
+      )
     ],
     1
   )
