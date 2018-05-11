@@ -9492,12 +9492,11 @@ if (inBrowser) {
       onOk: workouts => {
         for (let i = 0; i < workouts.length; i++) {
           let workout = workouts[i];
-          workout.loadWorkoutType({}, true);
-          workout.loadImage1(undefined, undefined, undefined, undefined, undefined,undefined, true);
-          workout.loadImage2(undefined, undefined, undefined, undefined, undefined,undefined, true);
-          workout.loadImage3(undefined, undefined, undefined, undefined, undefined,undefined, true);
-          workout.loadImage4(undefined, undefined, undefined, undefined, undefined,undefined, true);
-          workout.loadImage5(undefined, undefined, undefined, undefined, undefined,undefined, true);
+          workout.getImage1URL();
+          workout.getImage2URL();
+          workout.getImage3URL();
+          workout.getImage4URL();
+          workout.getImage5URL();
           window.$workouts.push(workout);
         }
       }
@@ -9506,7 +9505,7 @@ if (inBrowser) {
       onOk: eyeExercises => {
         for (let i = 0; i < eyeExercises.length; i++) {
           let eyeExercise = eyeExercises[i];
-          eyeExercise.loadImage(undefined, undefined, undefined, undefined, undefined,undefined, true);
+          eyeExercise.getImageURL();
           window.$eyeExercises.push(eyeExercise);
         }
       }
@@ -10786,7 +10785,7 @@ if (false) {(function () {
     },
   },
   beforeMount: function() {
-    for (let i = 0; i < window.$eyeExercises.length(); i++) {
+    for (let i = 0; i < window.$eyeExercises.length; i++) {
       if (window.$eyeExercises[i].getID() === this.id) {
         this.eyeExercise = window.$eyeExercises[i];
         this.loading = false;
@@ -10879,7 +10878,7 @@ if (false) {(function () {
   beforeMount: function () {
     let workoutsByType = [];
     for (let i = 0; i < window.$workouts.length; i++) {
-      if (window.$workouts[i].getWorkoutType().getCode() === this.type) {
+      if (window.$workouts[i].getWorkoutType() === this.type) {
         workoutsByType.push(window.$workouts[i]);
       }
     }
@@ -10979,7 +10978,6 @@ Apiomat.Datastore.getInstance().setOfflineUsageForClass(Apiomat.Day, true);
 Apiomat.Datastore.getInstance().setOfflineUsageForClass(Apiomat.Period, true);
 Apiomat.Datastore.getInstance().setOfflineUsageForClass(Apiomat.EyeExercise, true);
 Apiomat.Datastore.getInstance().setOfflineUsageForClass(Apiomat.Workout, true);
-Apiomat.Datastore.getInstance().setOfflineUsageForClass(Apiomat.WorkoutTypes, true);
 Apiomat.Datastore.setCachingStrategy(Apiomat.AOMCacheStrategy.NETWORK_ELSE_CACHE);
 
 new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */]({
@@ -22121,7 +22119,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
