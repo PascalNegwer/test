@@ -10850,6 +10850,7 @@ if (false) {(function () {
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   beforeCreate: function () {
@@ -10859,9 +10860,14 @@ if (false) {(function () {
   data() {
     return {
       workouts: [],
+      workoutType: '',
     }
   },
-  methods: {},
+  methods: {
+    goBack: function() {
+      window.history.back();
+    },
+  },
   beforeMount: function () {
     Apiomat.Workout.getWorkouts(undefined, {
       onOk: workouts => {
@@ -10871,6 +10877,7 @@ if (false) {(function () {
             onOk: workoutType => {
               if (workoutType.getCode() === this.type) {
                 this.workouts.push(workout);
+                this.workoutType = workoutType.getName();
               }
             }
           });
@@ -10896,6 +10903,32 @@ if (false) {(function () {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+let prepareSlider = function(self) {
+  for (let i = 1; i < 6; i++) {
+    if (self.workout.data.hasOwnProperty('image' + i + 'URL')) {
+      self.images = i;
+      console.log(self.workout.data['image' + i + 'URL']);
+    } else {
+      break;
+    }
+  }
+};
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   beforeCreate: function () {
@@ -10905,14 +10938,37 @@ if (false) {(function () {
   data() {
     return {
       workout: undefined,
+      loading: true,
+      images: 0,
+      activeIndex: 1,
+      transform: '0',
     }
   },
-  methods: {},
+  methods: {
+    goBack: function() {
+      window.history.back();
+    },
+    slideNext: function() {
+      if(this.activeIndex != this.images) {
+        let value = 100 / this.images;
+        this.transform = parseInt(this.transform) + value;
+        this.activeIndex++;
+      }
+    },
+    slidePrev: function() {
+      if(this.activeIndex != 1) {
+        let value = 100 / this.images;
+        this.transform = parseInt(this.transform) - value;
+        this.activeIndex--;
+      }
+    }
+  },
   beforeMount: function () {
     Apiomat.Workout.getWorkouts('id == id(' + this.id + ')', {
       onOk: workouts => {
         this.workout = workouts[0];
         this.loading = false;
+        prepareSlider(this);
       },
       onError: error => {
         console.log(error);
@@ -20879,7 +20935,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.eyelink-style[data-v-3e2581b2] {\n  font-family: Comfortaa, sans-serif;\n  font-size: 1.6rem;\n  justify-content: space-between;\n  padding-right: 14%;\n  align-items: center;\n  transition: opacity .15s ease-in-out;\n  line-height: 3;\n}\n.eyelink-style[data-v-3e2581b2]:active, .eyelink-style[data-v-3e2581b2]:active:before {\n  opacity: .5;\n}\n.eyelink-style[data-v-3e2581b2]:before {\n  transition: opacity .15s ease-in-out;\n  order: 1;\n  transform: rotate(-90deg);\n  font-size: 2rem;\n}\n.list-item[data-v-3e2581b2] {\n  width: 100%;\n}\n\n", ""]);
+exports.push([module.i, "\n.link[data-v-3e2581b2] {\n  font-family: Comfortaa, sans-serif;\n  font-size: 1.6rem;\n  justify-content: space-between;\n  padding-right: 14%;\n  align-items: center;\n  transition: opacity .15s ease-in-out;\n  line-height: 3;\n}\n.link[data-v-3e2581b2]:active, .link[data-v-3e2581b2]:active:before {\n  opacity: .5;\n}\n.link[data-v-3e2581b2]:before {\n  transition: opacity .15s ease-in-out;\n  order: 1;\n  transform: rotate(-90deg);\n  font-size: 2rem;\n}\n.list-item[data-v-3e2581b2] {\n  width: 100%;\n}\n\n", ""]);
 
 // exports
 
@@ -20910,8 +20966,7 @@ var render = function() {
             _c(
               "router-link",
               {
-                staticClass:
-                  "eyelink-style u_icon--down l_flex l_flex--horizontal",
+                staticClass: "link u_icon--down l_flex l_flex--horizontal",
                 attrs: {
                   eyeExercise: eyeExercise,
                   to: {
@@ -22104,7 +22159,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n.link[data-v-10a20903] {\n  font-family: Comfortaa, sans-serif;\n  font-size: 1.6rem;\n  justify-content: space-between;\n  padding-right: 14%;\n  align-items: center;\n  transition: opacity .15s ease-in-out;\n  line-height: 3;\n}\n.link[data-v-10a20903]:active, .link[data-v-10a20903]:active:before {\n  opacity: .5;\n}\n.link[data-v-10a20903]:before {\n  transition: opacity .15s ease-in-out;\n  order: 1;\n  transform: rotate(-90deg);\n  font-size: 2rem;\n}\n.list-item[data-v-10a20903] {\n  width: 100%;\n}\n.back-button[data-v-10a20903] {\n  margin-right: auto;\n  margin-top: auto;\n}\n", ""]);
 
 // exports
 
@@ -22120,8 +22175,10 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("h1", [_vm._v("WorkoutType")]),
+  return _c("div", { staticClass: "l_wrapper l_wrapper--small l_flex" }, [
+    _c("h1", { staticClass: "headline headline--main" }, [
+      _vm._v(_vm._s(_vm.workoutType))
+    ]),
     _vm._v(" "),
     _c(
       "ul",
@@ -22133,6 +22190,7 @@ var render = function() {
             _c(
               "router-link",
               {
+                staticClass: "link u_icon--down l_flex l_flex--horizontal",
                 attrs: {
                   to: {
                     name: "workout",
@@ -22146,6 +22204,19 @@ var render = function() {
           1
         )
       })
+    ),
+    _vm._v(" "),
+    _c(
+      "p",
+      {
+        staticClass: "btn btn--12 back-button",
+        on: {
+          click: function($event) {
+            _vm.goBack()
+          }
+        }
+      },
+      [_vm._v("zurück")]
     )
   ])
 }
@@ -22253,7 +22324,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n.exercise[data-v-55e3f329] {\n margin-top: 2rem;\n}\n.exercise__description[data-v-55e3f329] {\n  font-size: 1.4rem;\n  text-align: center;\n  line-height: 1.2;\n  margin-top: 2rem;\n}\n.back-button[data-v-55e3f329] {\n  margin-right: auto;\n  margin-bottom: 2rem;\n}\n.slider[data-v-55e3f329] {\n  margin-left: -1rem;\n  margin-right: -1rem;\n  position: relative;\n}\n.slider__wrapper[data-v-55e3f329] {\n  width: 200%;\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n  transition: transform .3s ease-in-out;\n}\n.slider__image[data-v-55e3f329] {\n  width: 50%;\n  height: auto;\n}\n.slider__index[data-v-55e3f329] {\n  position: absolute;\n  bottom: 0;\n  padding: .4rem 0;\n  left: 50%;\n  transform: translateX(-50%);\n}\n.slider__bullet[data-v-55e3f329] {\n  display: inline-block;\n  width: 1.2rem;\n  height: 1.2rem;\n  border: 1px solid var(--white);\n  border-radius: 50%;\n  margin: .4rem;\n}\n.slider__bullet--active[data-v-55e3f329] {\n  background: var(--white-50);\n}\n.slider__control[data-v-55e3f329] {\n  position: absolute;\n  height: 100%;\n  width: 20%;\n  top: 0;\n  display: block;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.slider__control[data-v-55e3f329]:before {\n  transform: rotate(-90deg);\n  font-size: 4rem;\n  color: var(--darkgrey);\n  transition: color .15s ease-in-out;\n}\n.slider__control[data-v-55e3f329]:active:before {\n  color: var(--lightgrey);\n}\n.slider__control--left[data-v-55e3f329] {\n  left: 0;\n}\n.slider__control--right[data-v-55e3f329] {\n  right: 0;\n}\n", ""]);
 
 // exports
 
@@ -22269,16 +22340,80 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "l_wrapper l_wrapper--small l_flex" }, [
+    _c(
+      "p",
+      {
+        staticClass: "btn btn--12 back-button",
+        on: {
+          click: function($event) {
+            _vm.goBack()
+          }
+        }
+      },
+      [_vm._v("zurück")]
+    ),
+    _vm._v(" "),
+    _vm.loading
+      ? _c("div", [_vm._v("Loading")])
+      : _c("section", { staticClass: "exercise" }, [
+          _c("div", { staticClass: "slider" }, [
+            _c(
+              "div",
+              {
+                staticClass: "slider__wrapper",
+                style: {
+                  width: 100 * _vm.images + "%",
+                  transform: "translateX(-" + _vm.transform + "%)"
+                }
+              },
+              _vm._l(_vm.images, function(index) {
+                return _c("img", {
+                  staticClass: "slider__image",
+                  style: { width: 100 / _vm.images + "%" },
+                  attrs: { src: _vm.workout["getImage" + index + "URL"]() }
+                })
+              })
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "slider__index" },
+              _vm._l(_vm.images, function(index) {
+                return _c("span", {
+                  staticClass: "slider__bullet",
+                  class: { "slider__bullet--active": index == _vm.activeIndex }
+                })
+              })
+            ),
+            _vm._v(" "),
+            _c("span", {
+              staticClass: "slider__control slider__control--left u_icon--up",
+              on: {
+                click: function($event) {
+                  _vm.slidePrev()
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("span", {
+              staticClass:
+                "slider__control slider__control--right u_icon--down",
+              on: {
+                click: function($event) {
+                  _vm.slideNext()
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "exercise__description" }, [
+            _vm._v(_vm._s(_vm.workout.getDescription()))
+          ])
+        ])
+  ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [_c("h1", [_vm._v("Workout")])])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 if (false) {
