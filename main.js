@@ -21979,7 +21979,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.workout-container[data-v-0194a17c] {\n  height: 100%;\n}\n.workout-types[data-v-0194a17c] {\n  height: 100%;\n  flex-direction: row;\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: center;\n  align-items: center;\n}\n.workout-types__description[data-v-0194a17c] {\n  flex-basis: 100%;\n  text-align: center;\n  font-size: 1.5rem;\n  font-family: 'Comfortaa', sans-serif;\n}\n.workout-types__item[data-v-0194a17c] {\n  flex-basis: 33%;\n  text-align: center;\n  padding: 1rem;\n}\n", ""]);
+exports.push([module.i, "\n.workout-types[data-v-0194a17c] {\n  flex-direction: row;\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: center;\n  align-items: center;\n}\n.workout-types__description[data-v-0194a17c] {\n  flex-basis: 100%;\n  text-align: center;\n  font-size: 1.6rem;\n  font-family: 'Comfortaa', sans-serif;\n}\n.workout-types__item[data-v-0194a17c] {\n  flex-basis: 33%;\n  text-align: center;\n  padding: 1rem;\n  transition: opacity .15s ease-in-out;\n}\n.workout-types__item[data-v-0194a17c]:active{\n  opacity: .5;\n}\n.workout-types__item[data-v-0194a17c]:before {\n  font-size: 5.4rem;\n}\n.workout-types__label[data-v-0194a17c] {\n  font-size: 1.6rem;\n  font-family: 'Roboto', sans-serif;\n  font-weight: 300;\n  padding-top: 1.2rem;\n}\n", ""]);
 
 // exports
 
@@ -21995,12 +21995,12 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "workout-container" }, [
+  return _c("div", { staticClass: "l_wrapper l_wrapper--small l_flex" }, [
     _c("h1", { staticClass: "headline headline--main" }, [_vm._v("Workout")]),
     _vm._v(" "),
     _c(
       "div",
-      { staticClass: "workout-types" },
+      { staticClass: "workout-types l_grow" },
       [
         _c("h3", { staticClass: "workout-types__description" }, [
           _vm._v("Wähle einen Bereich aus")
@@ -22009,46 +22009,54 @@ var render = function() {
         _c(
           "router-link",
           {
-            staticClass: "workout-types__item",
+            staticClass: "workout-types__item u_icon--leg",
             attrs: { to: { name: "workout-type", params: { type: "legs" } } }
           },
-          [_c("h1", [_vm._v("Beine")])]
+          [_c("h1", { staticClass: "workout-types__label" }, [_vm._v("Beine")])]
         ),
         _vm._v(" "),
         _c(
           "router-link",
           {
-            staticClass: "workout-types__item",
+            staticClass: "workout-types__item u_icon--arm",
             attrs: { to: { name: "workout-type", params: { type: "arms" } } }
           },
-          [_c("h1", [_vm._v("Arme")])]
+          [_c("h1", { staticClass: "workout-types__label" }, [_vm._v("Arme")])]
         ),
         _vm._v(" "),
         _c(
           "router-link",
           {
-            staticClass: "workout-types__item",
+            staticClass: "workout-types__item u_icon--spine",
             attrs: { to: { name: "workout-type", params: { type: "neck" } } }
           },
-          [_c("h1", [_vm._v("Nacken")])]
+          [
+            _c("h1", { staticClass: "workout-types__label" }, [
+              _vm._v("Nacken")
+            ])
+          ]
         ),
         _vm._v(" "),
         _c(
           "router-link",
           {
-            staticClass: "workout-types__item",
+            staticClass: "workout-types__item u_icon--head",
             attrs: { to: { name: "workout-type", params: { type: "head" } } }
           },
-          [_c("h1", [_vm._v("Kopf")])]
+          [_c("h1", { staticClass: "workout-types__label" }, [_vm._v("Kopf")])]
         ),
         _vm._v(" "),
         _c(
           "router-link",
           {
-            staticClass: "workout-types__item",
+            staticClass: "workout-types__item u_icon--human",
             attrs: { to: { name: "workout-type", params: { type: "back" } } }
           },
-          [_c("h1", [_vm._v("Rücken")])]
+          [
+            _c("h1", { staticClass: "workout-types__label" }, [
+              _vm._v("Rücken")
+            ])
+          ]
         )
       ],
       1
