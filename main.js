@@ -9807,7 +9807,7 @@ let createDay = function (self) {
       running: false,
       paused: false,
       day: new Apiomat.Day(),
-      periods: undefined,
+      periods: [],
       currentPeriod: undefined,
       overallWorkTime: moment(0),
       overallPauseTime: moment(0),
