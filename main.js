@@ -11215,7 +11215,7 @@ Apiomat.Datastore.getInstance().setOfflineUsageForClass(Apiomat.Day, true);
 Apiomat.Datastore.getInstance().setOfflineUsageForClass(Apiomat.Period, true);
 Apiomat.Datastore.getInstance().setOfflineUsageForClass(Apiomat.EyeExercise, true);
 Apiomat.Datastore.getInstance().setOfflineUsageForClass(Apiomat.Workout, true);
-Apiomat.Datastore.setCachingStrategy(Apiomat.AOMCacheStrategy.CACHE_ELSE_NETWORK);
+Apiomat.Datastore.setCachingStrategy(Apiomat.AOMCacheStrategy.NETWORK_ELSE_CACHE);
 
 new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */]({
   router: __WEBPACK_IMPORTED_MODULE_3__utils_router_js__["a" /* default */],
