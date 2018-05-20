@@ -9495,6 +9495,7 @@ if (inBrowser) {
   beforeMount: function () {
     Apiomat.Workout.getWorkouts('order by title ASC', {
       onOk: workouts => {
+        window.$workouts = [];
         for (let i = 0; i < workouts.length; i++) {
           let workout = workouts[i];
           window.$workouts.push(workout);
@@ -9505,6 +9506,7 @@ if (inBrowser) {
     }, true);
     Apiomat.EyeExercise.getEyeExercises('order by title ASC', {
       onOk: eyeExercises => {
+        window.$eyeExercises = [];
         for (let i = 0; i < eyeExercises.length; i++) {
           let eyeExercise = eyeExercises[i];
           window.$eyeExercises.push(eyeExercise);
@@ -11224,8 +11226,6 @@ __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].use(__WEBPACK_IMPORTED_MODU
 __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].config.productionTip = false;
 
 window.EventBus = new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */]();
-window.$workouts = [];
-window.$eyeExercises = [];
 __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].prototype.$user = new Apiomat.FrontendUser();
 
 Apiomat.Datastore.getInstance().setOfflineUsageForClass(Apiomat.FrontendUser, true);
@@ -20456,7 +20456,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
